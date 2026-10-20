@@ -9,6 +9,7 @@ This project has no release yet. Future releases are intended to follow [Semanti
 
 ### Added
 
+- `plan-pricing` and `paywall` commands, Play Console billing notes in `docs/billing-setup.md`, and an Expo RevenueCat paywall module with entitlement tests.
 - Repository foundation: project overview, MIT license, ignore rules, contribution guidelines, and this changelog.
 - Architecture decisions for platform selection, adapter order, the adapter manifest contract, shared backend, billing, analytics, AI model routing, and slash-command names.
 - Adapter directory with the planned manifest contract and implementation order.

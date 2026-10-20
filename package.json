@@ -11,9 +11,12 @@
   "scripts": {
     "lint:commands": "node scripts/lint-commands.mjs",
     "compile": "node scripts/compile-commands.mjs",
-    "test:backend": "node --test backend/supabase/tests/*.test.ts"
+    "test:backend": "node --test backend/supabase/tests/*.test.ts",
+    "test:billing": "node --experimental-strip-types --test platforms/expo/template/src/features/billing/useEntitlement.test.ts platforms/expo/template/src/features/billing/paywall.test.ts"
   },
   "devDependencies": {
-    "@electric-sql/pglite": "^0.5.10"
+    "@electric-sql/pglite": "^0.5.10",
+    "react": "^19.3.1",
+    "react-test-renderer": "^19.3.1"
   }
 }
