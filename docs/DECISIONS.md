@@ -37,7 +37,7 @@ These records capture planning decisions for fastAppshipKit. They do not mean th
 - **Status:** Accepted
 - **Decision:** Generated applications will use one shared Supabase backend architecture, with separate project configuration, environment isolation, authentication boundaries, and secure server-side operations.
 - **Rationale:** A common backend shape lets workflows stay portable across mobile targets while keeping development, preview, and production data and keys apart.
-- **Implementation:** The shared schema and AI proxy live in `backend/supabase/`. Setup and the client contract are in [docs/backend.md](backend.md). Platform adapters do not call this backend yet.
+- **Implementation:** The shared schema and AI proxy live in `backend/supabase/`. Setup and the client contract are in [docs/backend.md](backend.md). The Expo template calls the proxy through `platforms/expo/template/src/features/ai`. Flutter, Android, and iOS templates do not call it yet.
 
 ## ADR-005: Billing
 
@@ -50,12 +50,14 @@ These records capture planning decisions for fastAppshipKit. They do not mean th
 - **Status:** Accepted
 - **Decision:** Use PostHog for product analytics and Sentry for error monitoring. Both integrations must be configurable, and privacy considerations must be documented before either is turned on in a generated app.
 - **Rationale:** Separating product analytics from crash reporting keeps each tool focused. Making them configurable lets a developer disable collection or replace keys per environment.
+- **Implementation:** The Expo wrapper is `platforms/expo/template/src/lib/analytics.ts`. A settings flag disables PostHog and Sentry together. `docs/events.md` lists the events. `docs/analytics-setup.md` covers EAS source maps. Flutter, Android, and iOS templates do not include the SDKs yet.
 
 ## ADR-007: AI model routing
 
 - **Status:** Accepted
 - **Decision:** Route model calls through OpenRouter from a server-side Supabase Edge Function, or an equivalent trusted backend boundary. Private AI provider keys must never appear in mobile applications, generated client code, or committed configuration.
 - **Rationale:** Client apps are extractable. Keeping provider keys on the server limits exposure and gives the backend one place to enforce authentication, quotas, and logging.
+- **Implementation:** `backend/supabase/functions/ai-proxy` holds the OpenRouter key, checks the user session, and enforces the Postgres daily limit. The Expo hooks call that function only. The reason the key cannot ship in the client is in `platforms/expo/template/src/features/ai/README.md` and [docs/backend.md](backend.md).
 
 ## ADR-008: Slash-command naming
 

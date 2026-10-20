@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
+    "types": ["node"]
+  },
+  "include": [
+    "platforms/expo/template/src/lib/**/*.ts",
+    "platforms/expo/template/src/ui/**/*.ts",
+    "platforms/expo/template/src/features/ai/**/*.ts",
+    "platforms/expo/template/src/features/permissions/**/*.ts",
+    "platforms/expo/template/src/features/settings/**/*.ts",
+    "backend/supabase/functions/ai-proxy/handler.ts",
+    "backend/supabase/tests/ai-proxy.test.ts"
+  ]
+}

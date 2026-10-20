@@ -4,7 +4,7 @@
   "language": "TypeScript",
   "storeTargets": ["play", "appstore"],
   "templateDir": "platforms/expo/template",
-  "commands": ["start", "env-check", "plan-pricing", "paywall"],
+  "commands": ["start", "env-check", "plan-pricing", "paywall", "analytics", "ai"],
   "envChecks": [
     {
       "command": "node --version",

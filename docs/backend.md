@@ -1,6 +1,6 @@
 # Shared Supabase backend
 
-Every platform adapter will call this one backend. The schema and the edge function are in `backend/supabase/`. Adapters do not call it yet. Nothing in this repository creates a hosted Supabase project, deploys a function, or sets a secret. The commands that do those things are listed at the end for you to run.
+Every platform adapter will call this one backend. The schema and the edge function are in `backend/supabase/`. The Expo template calls `ai-proxy` from `platforms/expo/template/src/features/ai`. Flutter, Android, and iOS templates do not call it yet. Nothing in this repository creates a hosted Supabase project, deploys a function, or sets a secret. The commands that do those things are listed at the end for you to run.
 
 ## Why the AI key stays on the server
 
@@ -15,6 +15,7 @@ The Supabase anon key (or the newer publishable key) is a different kind of key.
 | `migrations/001_profiles.sql` | `profiles` row per auth user, row level security, signup trigger |
 | `migrations/002_ai_usage.sql` | `ai_usage` daily counts, row level security, `increment_ai_usage` |
 | `functions/ai-proxy/` | Session check, allowlist, daily limit, streaming OpenRouter call |
+| `platforms/expo/template/src/features/ai/` | Client hooks. They call this function and do not hold the provider key |
 | `tests/` | Row level security script, rate-limit script, and Node tests |
 
 `profiles.id` references `auth.users.id`. A user can select, insert, update, and delete only the row whose id is `auth.uid()`. Signing up inserts the auth user, and `handle_new_user` creates the matching profile.

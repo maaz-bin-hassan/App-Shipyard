@@ -4,7 +4,7 @@
   "language": "Swift",
   "storeTargets": ["appstore"],
   "templateDir": "platforms/ios/template",
-  "commands": ["start", "env-check", "plan-pricing", "paywall"],
+  "commands": ["start", "env-check", "plan-pricing", "paywall", "analytics", "ai"],
   "envChecks": [
     {
       "command": "node -p process.platform",

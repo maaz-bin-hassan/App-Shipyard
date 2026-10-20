@@ -30,6 +30,12 @@ What is implemented is the command contract and the compiler:
 
 `plan-pricing` writes `docs/monetization.md` and stores the recommended entitlement and product ids in `.shipkit/state.json`. `paywall` adds the Expo RevenueCat screen in `platforms/expo/template/src/features/billing`. Live Play Console products wait for an explicit yes. The doc citations are in [docs/billing-setup.md](docs/billing-setup.md). `pnpm test:billing` runs the entitlement tests.
 
+`analytics` adds the PostHog and Sentry wrapper in `platforms/expo/template/src/lib` and writes [docs/events.md](docs/events.md). Consent starts off and disables both. `pnpm test:analytics` covers that flag. EAS source maps are documented in [docs/analytics-setup.md](docs/analytics-setup.md).
+
+`ai` records the model allowlist and the daily limit. The Expo hooks in `platforms/expo/template/src/features/ai` call the Supabase proxy and do not call OpenRouter. `pnpm test:ai` covers the client. `pnpm test:backend` covers the session check and the daily limiter.
+
+Pre-permission screens for camera, photos, notifications, location, microphone, contacts, calendar, and Bluetooth are in `platforms/expo/template/src/features/permissions`. `pnpm test:permissions` covers the hook. There is no slash command for them.
+
 ## Shared backend
 
 Every platform will call one Supabase backend. The schema, the daily AI limit, and the OpenRouter proxy are in `backend/supabase/`. [docs/backend.md](docs/backend.md) has the setup commands and the HTTP contract.

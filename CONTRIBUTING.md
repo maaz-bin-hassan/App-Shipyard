@@ -30,7 +30,7 @@ Read [docs/DECISIONS.md](docs/DECISIONS.md) before changing architecture. Do not
 
 ## Testing and documentation
 
-When code exists, add or update tests for the behavior you change and run the relevant checks locally. This foundation has no test runner yet.
+When code exists, add or update tests for the behavior you change. Run `pnpm test:backend`, `pnpm test:billing`, `pnpm test:analytics`, `pnpm test:ai`, or `pnpm test:permissions` for the area you change. `pnpm tsc`, `pnpm lint`, and `pnpm lint:commands` check types, the Expo template, and the command contract.
 
 Update the README, changelog, and architecture notes when a change affects setup, commands, or decisions. Documentation should distinguish planned work from working behavior.
 

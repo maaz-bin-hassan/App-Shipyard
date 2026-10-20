@@ -10,13 +10,24 @@
   },
   "scripts": {
     "lint:commands": "node scripts/lint-commands.mjs",
+    "lint": "eslint",
+    "tsc": "tsc --noEmit",
     "compile": "node scripts/compile-commands.mjs",
     "test:backend": "node --test backend/supabase/tests/*.test.ts",
-    "test:billing": "node --experimental-strip-types --test platforms/expo/template/src/features/billing/useEntitlement.test.ts platforms/expo/template/src/features/billing/paywall.test.ts"
+    "test:billing": "node --experimental-strip-types --test platforms/expo/template/src/features/billing/useEntitlement.test.ts platforms/expo/template/src/features/billing/paywall.test.ts",
+    "test:analytics": "node --experimental-strip-types --test platforms/expo/template/src/lib/analytics.test.ts",
+    "test:ai": "node --experimental-strip-types --test platforms/expo/template/src/features/ai/aiClient.test.ts platforms/expo/template/src/features/ai/hooks.test.ts",
+    "test:permissions": "node --experimental-strip-types --test platforms/expo/template/src/features/permissions/usePermissionFlow.test.ts"
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.10",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-test-renderer": "^19.3.0",
+    "eslint": "^10.13.0",
     "react": "^19.3.1",
-    "react-test-renderer": "^19.3.1"
+    "react-test-renderer": "^19.3.1",
+    "typescript": "5.9.3",
+    "typescript-eslint": "^8.72.0"
   }
 }
