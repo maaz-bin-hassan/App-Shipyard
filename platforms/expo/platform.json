@@ -4,24 +4,60 @@
   "language": "TypeScript",
   "storeTargets": ["play", "appstore"],
   "templateDir": "platforms/expo/template",
-  "commands": ["env-check"],
+  "commands": ["start", "env-check"],
   "envChecks": [
     {
       "command": "node --version",
       "expected": "v",
       "install": {
-        "windows": "https://nodejs.org/en/download",
-        "macos": "https://nodejs.org/en/download",
-        "linux": "https://nodejs.org/en/download"
+        "windows": "Minimum: 22.13.0 on Node 22, 24.3.0 on Node 24, or an even major of 26 or newer. Odd majors fail. winget install -e --id OpenJS.NodeJS.LTS",
+        "macos": "Minimum: 22.13.0 on Node 22, 24.3.0 on Node 24, or an even major of 26 or newer. Odd majors fail. brew install node",
+        "linux": "Minimum: 22.13.0 on Node 22, 24.3.0 on Node 24, or an even major of 26 or newer. Odd majors fail. https://nodejs.org/en/download"
       }
     },
     {
-      "command": "npx expo --version",
-      "expected": ".",
+      "command": "java -version",
+      "expected": "version",
       "install": {
-        "windows": "https://docs.expo.dev/get-started/installation/",
-        "macos": "https://docs.expo.dev/get-started/installation/",
-        "linux": "https://docs.expo.dev/get-started/installation/"
+        "windows": "Minimum: 17. winget install -e --id Microsoft.OpenJDK.17",
+        "macos": "Minimum: 17. brew install --cask zulu@17",
+        "linux": "Minimum: 17. sudo apt-get install -y openjdk-17-jdk"
+      }
+    },
+    {
+      "command": "adb version",
+      "expected": "Android Debug Bridge",
+      "install": {
+        "windows": "Minimum: Android SDK Platform-Tools. sdkmanager \"platform-tools\"",
+        "macos": "Minimum: Android SDK Platform-Tools. sdkmanager \"platform-tools\"",
+        "linux": "Minimum: Android SDK Platform-Tools. sdkmanager \"platform-tools\""
+      }
+    },
+    {
+      "command": "node scripts/android-sdk-platform.mjs 37",
+      "expected": "android-sdk-37",
+      "install": {
+        "windows": "Minimum: Android SDK Platform 37 (Expo SDK 58 compileSdk) and Platform 36 (Play target). sdkmanager \"platforms;android-37\" \"platforms;android-36\"",
+        "macos": "Minimum: Android SDK Platform 37 (Expo SDK 58 compileSdk) and Platform 36 (Play target). sdkmanager \"platforms;android-37\" \"platforms;android-36\"",
+        "linux": "Minimum: Android SDK Platform 37 (Expo SDK 58 compileSdk) and Platform 36 (Play target). sdkmanager \"platforms;android-37\" \"platforms;android-36\""
+      }
+    },
+    {
+      "command": "xcodebuild -version",
+      "expected": "Xcode",
+      "install": {
+        "windows": "macOS only: Minimum: 26.4. Install Xcode 26.4 or later from the Mac App Store. https://developer.apple.com/xcode/",
+        "macos": "Minimum: 26.4. Install Xcode 26.4 or later from the Mac App Store. https://developer.apple.com/xcode/",
+        "linux": "macOS only: Minimum: 26.4. Install Xcode 26.4 or later from the Mac App Store. https://developer.apple.com/xcode/"
+      }
+    },
+    {
+      "command": "pod --version",
+      "expected": "1.",
+      "install": {
+        "windows": "macOS only: Minimum: 1.17.0. brew install cocoapods",
+        "macos": "Minimum: 1.17.0. brew install cocoapods",
+        "linux": "macOS only: Minimum: 1.17.0. brew install cocoapods"
       }
     }
   ],

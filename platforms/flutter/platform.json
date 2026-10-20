@@ -4,24 +4,51 @@
   "language": "Dart",
   "storeTargets": ["play", "appstore"],
   "templateDir": "platforms/flutter/template",
-  "commands": ["env-check"],
+  "commands": ["start", "env-check"],
   "envChecks": [
     {
       "command": "flutter --version",
       "expected": "Flutter",
       "install": {
-        "windows": "https://docs.flutter.dev/install/manual#windows",
-        "macos": "https://docs.flutter.dev/install/manual#macos",
-        "linux": "https://docs.flutter.dev/install/manual#linux"
+        "windows": "Minimum: 3.47.0. https://docs.flutter.dev/install/manual#windows",
+        "macos": "Minimum: 3.47.0. https://docs.flutter.dev/install/manual#macos",
+        "linux": "Minimum: 3.47.0. https://docs.flutter.dev/install/manual#linux"
       }
     },
     {
       "command": "dart --version",
       "expected": "Dart",
       "install": {
-        "windows": "https://dart.dev/get-dart",
-        "macos": "https://dart.dev/get-dart",
-        "linux": "https://dart.dev/get-dart"
+        "windows": "Minimum: 3.13.0. Dart 3.13.0 ships with Flutter 3.47.0. https://docs.flutter.dev/install/manual#windows",
+        "macos": "Minimum: 3.13.0. Dart 3.13.0 ships with Flutter 3.47.0. https://docs.flutter.dev/install/manual#macos",
+        "linux": "Minimum: 3.13.0. Dart 3.13.0 ships with Flutter 3.47.0. https://docs.flutter.dev/install/manual#linux"
+      }
+    },
+    {
+      "command": "java -version",
+      "expected": "version",
+      "install": {
+        "windows": "Minimum: 17. winget install -e --id Microsoft.OpenJDK.17",
+        "macos": "Minimum: 17. brew install --cask zulu@17",
+        "linux": "Minimum: 17. sudo apt-get install -y openjdk-17-jdk"
+      }
+    },
+    {
+      "command": "adb version",
+      "expected": "Android Debug Bridge",
+      "install": {
+        "windows": "Minimum: Android SDK Platform-Tools. sdkmanager \"platform-tools\"",
+        "macos": "Minimum: Android SDK Platform-Tools. sdkmanager \"platform-tools\"",
+        "linux": "Minimum: Android SDK Platform-Tools. sdkmanager \"platform-tools\""
+      }
+    },
+    {
+      "command": "node scripts/android-sdk-platform.mjs 36",
+      "expected": "android-sdk-36",
+      "install": {
+        "windows": "Minimum: Android SDK Platform 36. sdkmanager \"platforms;android-36\" \"platform-tools\"",
+        "macos": "Minimum: Android SDK Platform 36. sdkmanager \"platforms;android-36\" \"platform-tools\"",
+        "linux": "Minimum: Android SDK Platform 36. sdkmanager \"platforms;android-36\" \"platform-tools\""
       }
     }
   ],

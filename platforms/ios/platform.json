@@ -4,24 +4,42 @@
   "language": "Swift",
   "storeTargets": ["appstore"],
   "templateDir": "platforms/ios/template",
-  "commands": ["env-check"],
+  "commands": ["start", "env-check"],
   "envChecks": [
+    {
+      "command": "node -p process.platform",
+      "expected": "darwin",
+      "install": {
+        "windows": "Minimum: darwin. iOS native requires macOS and Xcode 26 or later. Choose Flutter, React Native (Expo), or Android native on this machine.",
+        "macos": "Minimum: darwin. This machine can continue to Xcode.",
+        "linux": "Minimum: darwin. iOS native requires macOS and Xcode 26 or later. Choose Flutter, React Native (Expo), or Android native on this machine."
+      }
+    },
     {
       "command": "xcodebuild -version",
       "expected": "Xcode",
       "install": {
-        "windows": "Xcode requires macOS. https://developer.apple.com/xcode/",
-        "macos": "https://developer.apple.com/xcode/",
-        "linux": "Xcode requires macOS. https://developer.apple.com/xcode/"
+        "windows": "Minimum: 26. iOS native requires macOS. Install Xcode 26 or later from the Mac App Store. https://developer.apple.com/xcode/",
+        "macos": "Minimum: 26. Install Xcode 26 or later from the Mac App Store. https://developer.apple.com/xcode/",
+        "linux": "Minimum: 26. iOS native requires macOS. Install Xcode 26 or later from the Mac App Store. https://developer.apple.com/xcode/"
       }
     },
     {
       "command": "swift --version",
       "expected": "Swift",
       "install": {
-        "windows": "Swift for this target ships with Xcode on macOS.",
-        "macos": "https://developer.apple.com/swift/",
-        "linux": "Swift for this target ships with Xcode on macOS."
+        "windows": "Minimum: 6.2. Swift 6.2 ships with Xcode 26 on macOS. https://developer.apple.com/xcode/",
+        "macos": "Minimum: 6.2. Swift 6.2 ships with Xcode 26. https://developer.apple.com/xcode/",
+        "linux": "Minimum: 6.2. Swift 6.2 ships with Xcode 26 on macOS. https://developer.apple.com/xcode/"
+      }
+    },
+    {
+      "command": "pod --version",
+      "expected": "1.",
+      "install": {
+        "windows": "Minimum: 1.17.0. CocoaPods for this target is installed on macOS with brew install cocoapods.",
+        "macos": "Minimum: 1.17.0. brew install cocoapods",
+        "linux": "Minimum: 1.17.0. CocoaPods for this target is installed on macOS with brew install cocoapods."
       }
     }
   ],

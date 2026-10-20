@@ -67,6 +67,8 @@ export async function lintRepository(root) {
         );
       }
     }
+
+    await lintTemplate(root, platform, errors);
   }
 
   return errors;
@@ -429,6 +431,35 @@ function validateEnvCheck(rel, index, check, errors) {
     const hint = check.install[key];
     if (typeof hint !== "string" || hint.trim() === "") {
       errors.push(`${rel}: ${label}.install.${key} must be a non-empty string`);
+    } else if (!hint.includes("Minimum:")) {
+      errors.push(`${rel}: ${label}.install.${key} must include a Minimum: version`);
+    }
+  }
+}
+
+async function lintTemplate(root, platform, errors) {
+  const templateDir = platform.manifest?.templateDir;
+  if (typeof templateDir !== "string" || templateDir.trim() === "") return;
+
+  const absolute = path.resolve(root, templateDir);
+  const relative = path.relative(root, absolute);
+  if (relative.startsWith("..") || path.isAbsolute(relative)) {
+    errors.push(`${platform.rel}: templateDir must stay inside the repository`);
+    return;
+  }
+
+  const readmePath = path.join(absolute, "README.md");
+  let readme;
+  try {
+    readme = await readFile(readmePath, "utf8");
+  } catch {
+    errors.push(`${platform.rel}: ${templateDir}/README.md is missing`);
+    return;
+  }
+
+  for (const token of ["{{appName}}", "{{applicationId}}", "{{primaryColor}}"]) {
+    if (!readme.includes(token)) {
+      errors.push(`${platform.rel}: ${templateDir}/README.md must contain ${token}`);
     }
   }
 }

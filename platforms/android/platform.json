@@ -4,24 +4,33 @@
   "language": "Kotlin",
   "storeTargets": ["play"],
   "templateDir": "platforms/android/template",
-  "commands": ["env-check"],
+  "commands": ["start", "env-check"],
   "envChecks": [
     {
       "command": "java -version",
       "expected": "version",
       "install": {
-        "windows": "https://developer.android.com/studio",
-        "macos": "https://developer.android.com/studio",
-        "linux": "https://developer.android.com/studio"
+        "windows": "Minimum: 17. winget install -e --id Microsoft.OpenJDK.17",
+        "macos": "Minimum: 17. brew install --cask zulu@17",
+        "linux": "Minimum: 17. sudo apt-get install -y openjdk-17-jdk"
       }
     },
     {
       "command": "adb version",
       "expected": "Android Debug Bridge",
       "install": {
-        "windows": "https://developer.android.com/tools/releases/platform-tools",
-        "macos": "https://developer.android.com/tools/releases/platform-tools",
-        "linux": "https://developer.android.com/tools/releases/platform-tools"
+        "windows": "Minimum: Android SDK Platform-Tools. sdkmanager \"platform-tools\"",
+        "macos": "Minimum: Android SDK Platform-Tools. sdkmanager \"platform-tools\"",
+        "linux": "Minimum: Android SDK Platform-Tools. sdkmanager \"platform-tools\""
+      }
+    },
+    {
+      "command": "node scripts/android-sdk-platform.mjs 36",
+      "expected": "android-sdk-36",
+      "install": {
+        "windows": "Minimum: Android SDK Platform 36. sdkmanager \"platforms;android-36\" \"platform-tools\"",
+        "macos": "Minimum: Android SDK Platform 36. sdkmanager \"platforms;android-36\" \"platform-tools\"",
+        "linux": "Minimum: Android SDK Platform 36. sdkmanager \"platforms;android-36\" \"platform-tools\""
       }
     }
   ],

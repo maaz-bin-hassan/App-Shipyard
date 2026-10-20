@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { parseArgs } from "node:util";
 import { fileURLToPath } from "node:url";
@@ -93,9 +93,13 @@ for (const commandName of platform.manifest.commands) {
   rendered.push({ commandName, markdown });
 }
 
+const keep = new Set(rendered.map((command) => command.commandName));
+
 for (const agentId of agents) {
   const target = AGENT_TARGETS[agentId];
   if (target.mode === "agents-md") continue;
+
+  await pruneGenerated(path.join(root, target.dir), target.mode, keep);
 
   for (const command of rendered) {
     const output = outputPath(root, target, command.commandName);
@@ -109,6 +113,29 @@ if (agents.some((agentId) => AGENT_TARGETS[agentId].mode === "agents-md")) {
   const listingAgents = agents.filter((agentId) => AGENT_TARGETS[agentId].mode === "agents-md");
   await writeAgentListing(root, platform.id, listingAgents, rendered);
   console.log(`codex: AGENTS.md`);
+}
+
+async function pruneGenerated(dir, mode, keepNames) {
+  let entries = [];
+  try {
+    entries = await readdir(dir, { withFileTypes: true });
+  } catch {
+    return;
+  }
+
+  for (const entry of entries) {
+    const fileMatch = mode === "file" && entry.isFile() && /^ship-.+\.md$/.test(entry.name);
+    const skillMatch = mode === "skill" && entry.isDirectory() && entry.name.startsWith("ship-");
+    if (!fileMatch && !skillMatch) continue;
+
+    const commandName = fileMatch
+      ? entry.name.slice("ship-".length, -".md".length)
+      : entry.name.slice("ship-".length);
+    if (keepNames.has(commandName)) continue;
+
+    await rm(path.join(dir, entry.name), { recursive: true, force: true });
+    console.log(`removed ${path.relative(root, path.join(dir, entry.name))}`);
+  }
 }
 
 function outputPath(repoRoot, target, commandName) {
