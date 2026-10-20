@@ -1,0 +1,38 @@
+{
+  "id": "ios",
+  "name": "iOS native",
+  "language": "Swift",
+  "storeTargets": ["appstore"],
+  "templateDir": "platforms/ios/template",
+  "commands": ["env-check"],
+  "envChecks": [
+    {
+      "command": "xcodebuild -version",
+      "expected": "Xcode",
+      "install": {
+        "windows": "Xcode requires macOS. https://developer.apple.com/xcode/",
+        "macos": "https://developer.apple.com/xcode/",
+        "linux": "Xcode requires macOS. https://developer.apple.com/xcode/"
+      }
+    },
+    {
+      "command": "swift --version",
+      "expected": "Swift",
+      "install": {
+        "windows": "Swift for this target ships with Xcode on macOS.",
+        "macos": "https://developer.apple.com/swift/",
+        "linux": "Swift for this target ships with Xcode on macOS."
+      }
+    }
+  ],
+  "services": {
+    "auth": "supabase",
+    "billing": "revenuecat",
+    "analytics": "posthog",
+    "crashes": "sentry"
+  },
+  "buildTool": "xcodebuild",
+  "releaseTool": "xcodebuild",
+  "stringsFormat": "xcstrings",
+  "permissionsFile": "App/Info.plist"
+}

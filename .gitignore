@@ -2,6 +2,12 @@
 .fastappshipkit/
 .shipkit/
 
+# Compiled slash commands (scripts/compile-commands.mjs)
+.claude/commands/ship-*.md
+.cursor/commands/ship-*.md
+.opencode/commands/ship-*.md
+.agents/skills/ship-*/
+
 # Environment files and secrets
 .env
 .env.*

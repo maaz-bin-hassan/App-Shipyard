@@ -1,0 +1,38 @@
+{
+  "id": "flutter",
+  "name": "Flutter",
+  "language": "Dart",
+  "storeTargets": ["play", "appstore"],
+  "templateDir": "platforms/flutter/template",
+  "commands": ["env-check"],
+  "envChecks": [
+    {
+      "command": "flutter --version",
+      "expected": "Flutter",
+      "install": {
+        "windows": "https://docs.flutter.dev/install/manual#windows",
+        "macos": "https://docs.flutter.dev/install/manual#macos",
+        "linux": "https://docs.flutter.dev/install/manual#linux"
+      }
+    },
+    {
+      "command": "dart --version",
+      "expected": "Dart",
+      "install": {
+        "windows": "https://dart.dev/get-dart",
+        "macos": "https://dart.dev/get-dart",
+        "linux": "https://dart.dev/get-dart"
+      }
+    }
+  ],
+  "services": {
+    "auth": "supabase",
+    "billing": "revenuecat",
+    "analytics": "posthog",
+    "crashes": "sentry"
+  },
+  "buildTool": "flutter",
+  "releaseTool": "flutter",
+  "stringsFormat": "arb",
+  "permissionsFile": "android/app/src/main/AndroidManifest.xml"
+}

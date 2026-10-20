@@ -1,0 +1,15 @@
+{
+  "name": "fastappshipkit",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "AI-agent starter kit for shipping mobile apps. Command contract and compiler only.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "lint:commands": "node scripts/lint-commands.mjs",
+    "compile": "node scripts/compile-commands.mjs"
+  }
+}

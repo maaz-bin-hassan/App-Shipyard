@@ -19,9 +19,14 @@ The planned adapter order is Expo, then Flutter, then Android native, then iOS n
 
 ## Installation and usage
 
-Installation and usage instructions are not available yet.
+The kit cannot initialize an app yet. `/ship-init`, `/ship-platform`, and `/ship-doctor` are reserved names and are not implemented.
 
-When the kit can initialize a project, this section will document how to install it and how to run the planned commands, including `/ship-init`, `/ship-platform`, and `/ship-doctor`. Those commands are names reserved by the project decisions. They are not implemented in this repository.
+What is implemented is the command contract and the compiler:
+
+- `npm run lint:commands` checks command files, platform fragments, and manifests. `pnpm run lint:commands` runs the same script.
+- `npm run compile -- --platform flutter` merges `env-check` for Flutter into each agent's project command location.
+
+`env-check` documents a toolchain check. It does not install tools. See [docs/SPEC.md](docs/SPEC.md).
 
 ## Contributing
 

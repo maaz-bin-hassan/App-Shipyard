@@ -1,0 +1,38 @@
+{
+  "id": "android",
+  "name": "Android native",
+  "language": "Kotlin",
+  "storeTargets": ["play"],
+  "templateDir": "platforms/android/template",
+  "commands": ["env-check"],
+  "envChecks": [
+    {
+      "command": "java -version",
+      "expected": "version",
+      "install": {
+        "windows": "https://developer.android.com/studio",
+        "macos": "https://developer.android.com/studio",
+        "linux": "https://developer.android.com/studio"
+      }
+    },
+    {
+      "command": "adb version",
+      "expected": "Android Debug Bridge",
+      "install": {
+        "windows": "https://developer.android.com/tools/releases/platform-tools",
+        "macos": "https://developer.android.com/tools/releases/platform-tools",
+        "linux": "https://developer.android.com/tools/releases/platform-tools"
+      }
+    }
+  ],
+  "services": {
+    "auth": "supabase",
+    "billing": "revenuecat",
+    "analytics": "posthog",
+    "crashes": "sentry"
+  },
+  "buildTool": "gradle",
+  "releaseTool": "gradle",
+  "stringsFormat": "xml",
+  "permissionsFile": "app/src/main/AndroidManifest.xml"
+}

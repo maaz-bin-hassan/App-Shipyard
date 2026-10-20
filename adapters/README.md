@@ -13,14 +13,4 @@ This is the planned development sequence from [ADR-002](../docs/DECISIONS.md).
 
 ## Manifest contract
 
-Each adapter will add a manifest that agents can read before running commands. The minimum fields are defined in [ADR-003](../docs/DECISIONS.md):
-
-- `id`
-- `displayName`
-- `status` (`planned`, `experimental`, or `supported`)
-- `prerequisites`
-- `commands`
-- `configuration` (non-secret keys only)
-- `capabilities`
-
-A manifest with `status: planned` describes intent. It does not mean the adapter can scaffold an app. Private keys, store credentials, and service tokens do not belong in a manifest or in git.
+The manifest the linter and compiler read is `platforms/<id>/platform.json`, specified in [docs/SPEC.md](../docs/SPEC.md). This directory does not contain those manifests or application templates. Private keys, store credentials, and service tokens do not belong in a manifest or in git.

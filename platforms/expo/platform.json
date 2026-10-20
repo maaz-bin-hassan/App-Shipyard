@@ -1,0 +1,38 @@
+{
+  "id": "expo",
+  "name": "React Native (Expo)",
+  "language": "TypeScript",
+  "storeTargets": ["play", "appstore"],
+  "templateDir": "platforms/expo/template",
+  "commands": ["env-check"],
+  "envChecks": [
+    {
+      "command": "node --version",
+      "expected": "v",
+      "install": {
+        "windows": "https://nodejs.org/en/download",
+        "macos": "https://nodejs.org/en/download",
+        "linux": "https://nodejs.org/en/download"
+      }
+    },
+    {
+      "command": "npx expo --version",
+      "expected": ".",
+      "install": {
+        "windows": "https://docs.expo.dev/get-started/installation/",
+        "macos": "https://docs.expo.dev/get-started/installation/",
+        "linux": "https://docs.expo.dev/get-started/installation/"
+      }
+    }
+  ],
+  "services": {
+    "auth": "supabase",
+    "billing": "revenuecat",
+    "analytics": "posthog",
+    "crashes": "sentry"
+  },
+  "buildTool": "expo",
+  "releaseTool": "eas",
+  "stringsFormat": "json",
+  "permissionsFile": "app.json"
+}
