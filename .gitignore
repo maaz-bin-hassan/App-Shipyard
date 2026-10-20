@@ -2,6 +2,10 @@
 .fastappshipkit/
 .shipkit/
 
+# Supabase CLI local metadata. Migrations, functions, and config stay tracked.
+backend/supabase/.temp/
+backend/supabase/.branches/
+
 # Compiled slash commands (scripts/compile-commands.mjs)
 .claude/commands/ship-*.md
 .cursor/commands/ship-*.md

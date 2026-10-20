@@ -37,6 +37,7 @@ These records capture planning decisions for fastAppshipKit. They do not mean th
 - **Status:** Accepted
 - **Decision:** Generated applications will use one shared Supabase backend architecture, with separate project configuration, environment isolation, authentication boundaries, and secure server-side operations.
 - **Rationale:** A common backend shape lets workflows stay portable across mobile targets while keeping development, preview, and production data and keys apart.
+- **Implementation:** The shared schema and AI proxy live in `backend/supabase/`. Setup and the client contract are in [docs/backend.md](backend.md). Platform adapters do not call this backend yet.
 
 ## ADR-005: Billing
 

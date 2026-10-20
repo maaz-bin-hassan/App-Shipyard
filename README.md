@@ -28,6 +28,12 @@ What is implemented is the command contract and the compiler:
 
 `env-check` documents a toolchain check. It does not install tools. See [docs/SPEC.md](docs/SPEC.md).
 
+## Shared backend
+
+Every platform will call one Supabase backend. The schema, the daily AI limit, and the OpenRouter proxy are in `backend/supabase/`. [docs/backend.md](docs/backend.md) has the setup commands and the HTTP contract.
+
+The OpenRouter key stays in Supabase secrets. It does not belong in a mobile app. The files in this repo do not create a hosted project or set that key.
+
 ## Contributing
 
 Contributions are welcome once you have read [CONTRIBUTING.md](CONTRIBUTING.md). In particular, do not contribute copied material from paid or closed-source starter kits.

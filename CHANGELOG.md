@@ -13,3 +13,4 @@ This project has no release yet. Future releases are intended to follow [Semanti
 - Architecture decisions for platform selection, adapter order, the adapter manifest contract, shared backend, billing, analytics, AI model routing, and slash-command names.
 - Adapter directory with the planned manifest contract and implementation order.
 - Command specification, platform manifests, `env-check` source files, command linter, and per-agent compiler.
+- Shared Supabase backend: profile and AI usage migrations, an OpenRouter edge proxy, and tests for row level security and the daily request limit.

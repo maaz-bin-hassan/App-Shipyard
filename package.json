@@ -3,13 +3,17 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "description": "AI-agent starter kit for shipping mobile apps. Command contract and compiler only.",
+  "description": "AI-agent starter kit for shipping mobile apps. Command contract, compiler, and shared Supabase backend.",
   "license": "MIT",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "lint:commands": "node scripts/lint-commands.mjs",
-    "compile": "node scripts/compile-commands.mjs"
+    "compile": "node scripts/compile-commands.mjs",
+    "test:backend": "node --test backend/supabase/tests/*.test.ts"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.10"
   }
 }
