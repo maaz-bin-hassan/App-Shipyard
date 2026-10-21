@@ -2,7 +2,7 @@
 
 ![Project status](https://img.shields.io/badge/status-in%20development-orange)
 
-fastAppshipKit is a planned open-source starter kit for shipping mobile apps with AI coding agents. A developer will choose a platform, then use slash commands in Claude Code, Cursor, Codex, or a similar agent to scaffold the project and follow shared workflows. Platform-specific adapters, reusable workflows, and agent-readable instructions are the intended shape of the kit. None of that behavior is implemented yet.
+fastAppshipKit is an open-source starter kit for shipping mobile apps with AI coding agents. A developer chooses a platform, scaffolds an app with `createshipyard`, then uses slash commands in Claude Code, Cursor, OpenCode, or a similar agent. The CLI is in this repository and is not published to npm yet.
 
 > **Work in progress.** This repository is a foundation only. Commands, APIs, file layouts, and architecture may change before the first usable release. Do not treat the decisions in `docs/DECISIONS.md` as a stable public API.
 
@@ -15,13 +15,28 @@ The kit is planned to target one platform per generated app:
 3. **Android native** — Kotlin and Jetpack Compose
 4. **iOS native** — Swift and SwiftUI
 
-The planned adapter order is Expo, then Flutter, then Android native, then iOS native. That order is a development sequence, not a statement that any adapter works today.
+The adapter order is Expo, then Flutter, then Android native, then iOS native. `createshipyard` copies the Expo template by default. The Flutter, Android, and iOS templates are still stubs.
 
 ## Installation and usage
 
-The kit cannot initialize an app yet. `/ship-init`, `/ship-platform`, and `/ship-doctor` are reserved names and are not implemented.
+From this checkout, build the CLI and create an app:
 
-What is implemented is the command contract and the compiler:
+```bash
+pnpm install
+pnpm cli:build
+node cli/dist/index.js my-app
+```
+
+`node cli/dist/index.js my-app` copies the Expo template, compiles slash commands, writes `AGENTS.md`, initializes git, installs npm dependencies, and prints the next step: open the folder in Claude Code and run `/ship-start`. Flags:
+
+- `--agent claude|cursor|opencode|all` (default `claude`)
+- `--platform expo|flutter|android|ios` (default `expo`)
+- `--pm npm|pnpm|yarn` (default `npm`)
+- `--no-install`
+
+`/ship-init`, `/ship-platform`, and `/ship-doctor` are reserved names and are not implemented. `ship-update` compares `.shipkit/state.json` `kitVersion` with the release notes and applies `docs/migrations/<version>.md`. See [docs/migrations/README.md](docs/migrations/README.md) for a version bump. The package is not on npm. The release workflow in `.github/workflows/release.yml` does not run.
+
+The command contract and the compiler:
 
 - `npm run lint:commands` checks command files, platform fragments, and manifests. `pnpm run lint:commands` runs the same script.
 - `npm run compile -- --platform flutter` merges `env-check` for Flutter into each agent's project command location.

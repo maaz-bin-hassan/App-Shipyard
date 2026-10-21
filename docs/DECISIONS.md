@@ -7,6 +7,7 @@ These records capture planning decisions for fastAppshipKit. They do not mean th
 - **Status:** Accepted
 - **Decision:** When a developer initializes a project, they select one of four targets: React Native with Expo, Flutter, Android native with Kotlin and Jetpack Compose, or iOS native with Swift and SwiftUI.
 - **Rationale:** One explicit target keeps generated projects and agent instructions coherent. Supporting every platform inside a single generated app would mix toolchains, stores, and UI frameworks.
+- **Implementation:** `createshipyard` writes `platform` into `.shipkit/state.json`. `/ship-start` skips the platform question when that value is already `expo`, `flutter`, `android`, or `ios`.
 
 ## ADR-002: Platform implementation order
 

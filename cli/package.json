@@ -1,0 +1,17 @@
+{
+  "name": "createshipyard",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Scaffold a fastAppshipKit app. Not published yet.",
+  "license": "MIT",
+  "bin": {
+    "createshipyard": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  }
+}

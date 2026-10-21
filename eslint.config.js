@@ -13,6 +13,7 @@ export default tseslint.config({
     "platforms/expo/template/src/features/permissions/**/*.ts",
     "platforms/expo/template/src/features/settings/**/*.ts",
     "backend/supabase/functions/ai-proxy/handler.ts",
+    "cli/src/**/*.ts",
   ],
   extends: [tseslint.configs.recommended],
 });

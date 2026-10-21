@@ -166,3 +166,19 @@ Checked against current vendor docs on 2026-10-20. The config object in `scripts
 | `opencode` | `.opencode/commands/ship-<name>.md` | [OpenCode commands](https://opencode.ai/v2/docs/commands) load project commands from `.opencode/commands/*.md`. The filename becomes the slash command. The legacy `command/` directory is still discovered; new files belong in `commands/`. |
 | `antigravity` | `.agents/skills/ship-<name>/SKILL.md` | [Antigravity's migration guide](https://antigravity.google/docs/migration/workflows-to-skills/) says workspace workflows in `.agents/workflows/<name>.md` stop being indexed after 2026-10-19. The current project slash command is a skill at `.agents/skills/<name>/SKILL.md`, invoked as `/<name>`. The directory carries the `ship-` prefix because the host requires the file itself to be named `SKILL.md`. |
 | `codex` | Listed in `AGENTS.md` | [Codex custom prompts](https://developers.openai.com/codex/custom-prompts) are deprecated and lived in the user directory `~/.codex/prompts`, not in the project. Codex has no project-level custom slash-command folder. Project skills exist at `.agents/skills` and are invoked with `$name` or `/skills`, so the Antigravity skill file is also visible to Codex. The compiler still lists the merged command in `AGENTS.md`, which Codex loads as project instructions. |
+
+## Scaffold
+
+`createshipyard` lives in `cli/`. It is not published. From this repository, `pnpm cli:build` then `node cli/dist/index.js my-app` copies `platforms/<id>/template` by running `scripts/sync-project.mjs`, writes a project `AGENTS.md` and `.shipkit/state.json`, initializes git, installs dependencies, and prints the next slash command.
+
+Flags are `--agent` (`claude`, `cursor`, `opencode`, or `all`), `--platform` (`expo` by default, or `flutter`, `android`, `ios`), `--pm` (`npm`, `pnpm`, or `yarn`), and `--no-install`. The default platform is `expo`. `ios` is refused when `process.platform` is not `darwin`.
+
+`scripts/e2esmoke.sh` scaffolds into a temporary directory, then runs `tsc --noEmit` and `expo export --platform android`.
+
+## Updates
+
+`ship-update` compares `.shipkit/state.json` `kitVersion` with the latest release notes. In this repository the notes are `CHANGELOG.md` and the version is `package.json` `version`. In a generated app the notes are `docs/kit/CHANGELOG.md` and the version is `docs/kit/version.json`. Guides are `docs/migrations/<version>.md` where `<version>` is `major.minor.patch`.
+
+`node scripts/plan-update.mjs` prints `kitVersion`, `latest`, `ahead`, and `migrations`. It does not edit files. Before applying a guide, the command creates branch `ship-update-checkpoint-<stamp>` and writes `.shipkit/update-checkpoint.json` with `branch`, `head`, and `stashed`. That file stays under `.shipkit/`, which is gitignored. A guide may name only the files it changes. Rollback is `git reset --hard` on the recorded `head`.
+
+How to write the next version bump is in [docs/migrations/README.md](migrations/README.md). This repository is still `0.0.0`.

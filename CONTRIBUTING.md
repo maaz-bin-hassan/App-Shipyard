@@ -30,7 +30,7 @@ Read [docs/DECISIONS.md](docs/DECISIONS.md) before changing architecture. Do not
 
 ## Testing and documentation
 
-When code exists, add or update tests for the behavior you change. Run `pnpm test:backend`, `pnpm test:billing`, `pnpm test:analytics`, `pnpm test:ai`, `pnpm test:permissions`, `pnpm test:design`, `pnpm test:i18n`, or `pnpm test:legal` for the area you change. `pnpm tsc`, `pnpm lint`, and `pnpm lint:commands` check types, the Expo template, and the command contract.
+When code exists, add or update tests for the behavior you change. Run `pnpm test:backend`, `pnpm test:billing`, `pnpm test:analytics`, `pnpm test:ai`, `pnpm test:permissions`, `pnpm test:design`, `pnpm test:i18n`, `pnpm test:legal`, or `pnpm test:cli` for the area you change. `pnpm tsc`, `pnpm lint`, and `pnpm lint:commands` check types, the Expo template, and the command contract. `pnpm smoke` scaffolds an Expo app and runs `tsc --noEmit` plus `expo export --platform android`.
 
 Update the README, changelog, and architecture notes when a change affects setup, commands, or decisions. Documentation should distinguish planned work from working behavior.
 

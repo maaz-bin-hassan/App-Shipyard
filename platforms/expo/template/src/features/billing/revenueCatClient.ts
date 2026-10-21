@@ -61,7 +61,7 @@ export function createRevenueCatClient(): BillingClient {
     purchasePackage: async (pkg) => {
       const raw = pkg.raw as PurchasesPackage | undefined;
       if (!raw) throw new Error("Missing store package");
-      const result = await Purchases.purchasePackage(raw);
+      const result = await Purchases.purchasePackage(raw as Parameters<typeof Purchases.purchasePackage>[0]);
       return { customerInfo: toCustomerInfo(result.customerInfo) };
     },
     addCustomerInfoUpdateListener: (listener) => {

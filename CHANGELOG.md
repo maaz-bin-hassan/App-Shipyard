@@ -9,6 +9,7 @@ This project has no release yet. Future releases are intended to follow [Semanti
 
 ### Added
 
+- `createshipyard` CLI in `cli/`. It copies one platform template, syncs slash commands, writes a project `AGENTS.md`, initializes git, and installs dependencies. `ship-update` applies `docs/migrations/<version>.md` after a git checkpoint. CI covers lint, types, unit tests, the command contract, and `scripts/e2esmoke.sh`. The release workflow is present and disabled.
 - `publish` command and Play Console notes in `docs/play-console-checklist.md`. Internal testing waits for an explicit yes at each console step. Listing text, icons, and screenshots are checked against the current Play asset rules.
 - `design`, `translate`, and `legal` commands. Expo theme tokens and screen components, locale JSON with Urdu and Arabic RTL checks, and a privacy draft plus Play Data safety answers generated from the template's dependencies, permissions, events, and Supabase schema.
 - `analytics` and `ai` commands. Expo template wrappers for PostHog and Sentry, a consent flag, the event list in `docs/events.md`, streaming and one-shot AI hooks, and eight pre-permission screens.

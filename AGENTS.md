@@ -1,6 +1,6 @@
 # AGENTS.md
 
-fastAppshipKit is an open-source starter kit that will let a developer pick one mobile platform and run the same slash commands in Claude Code, Cursor, OpenCode, Google Antigravity, or Codex. This repository currently defines the command format, the platform contract, and the compiler. It does not scaffold an app.
+fastAppshipKit is an open-source starter kit that lets a developer pick one mobile platform and run the same slash commands in Claude Code, Cursor, OpenCode, Google Antigravity, or Codex. This repository defines the command format, the platform contract, the compiler, and the `createshipyard` CLI. The CLI copies one platform template into a new app.
 
 Read [docs/SPEC.md](docs/SPEC.md) before editing anything under `commands/` or `platforms/`.
 
@@ -12,7 +12,10 @@ platforms/<id>/platform.json            manifest
 platforms/<id>/fragments/<name>.md      Preconditions, Steps, Rollback
 scripts/lint-commands.mjs               contract check
 scripts/compile-commands.mjs            merges one platform into agent command files
+scripts/sync-project.mjs                copies one template into a new app and compiles commands there
+cli/                                    createshipyard, the TypeScript scaffolder
 docs/SPEC.md                            command format, schemas, and design rules
+docs/migrations/<version>.md            kit upgrade guides
 .shipkit/state.json                     local run state, gitignored
 ```
 

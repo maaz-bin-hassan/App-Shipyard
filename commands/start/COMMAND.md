@@ -9,7 +9,7 @@ Ask which platform this project ships, save the app identity and store targets, 
 
 ## Ask
 
-Ask the platform question first, before any other question and before Steps. Ask it only when `.shipkit/state.json` is missing or `platform` is null. When `create-shipkit` has already written `platform` as `expo`, `flutter`, `android`, or `ios`, skip this question and keep that value.
+Ask the platform question first, before any other question and before Steps. Ask it only when `.shipkit/state.json` is missing or `platform` is null. When `createshipyard` has already written `platform` as `expo`, `flutter`, `android`, or `ios`, skip this question and keep that value.
 
 The platform choices are:
 
