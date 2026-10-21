@@ -1,6 +1,6 @@
 # {{appName}}
 
-Stub Flutter app for fastAppshipKit. This folder is not a buildable project yet.
+Stub Flutter app for App Shipyard. This folder is not a buildable project yet.
 
 - Application id: {{applicationId}}
 - Primary colour: {{primaryColor}}

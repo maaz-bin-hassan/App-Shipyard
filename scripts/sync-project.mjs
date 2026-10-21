@@ -182,7 +182,7 @@ async function copyMigrations(source, dest) {
 function projectAgents(platform, nextStep) {
   return `# AGENTS.md
 
-This app was created with fastAppshipKit (\`createshipyard\`). The selected platform is \`${platform}\`. Recorded state is \`.shipkit/state.json\`.
+This app was created with App Shipyard (\`createshipyard\`). The selected platform is \`${platform}\`. Recorded state is \`.shipkit/state.json\`.
 
 Kit release notes for this checkout are \`docs/kit/CHANGELOG.md\`. The synced kit version is \`docs/kit/version.json\`. Migration guides are \`docs/migrations/<version>.md\`.
 

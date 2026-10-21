@@ -60,7 +60,7 @@ export function findKitRoot(startDir: string): string {
     }
     const parent = path.dirname(dir);
     if (parent === dir) {
-      throw new Error("Could not find the fastAppshipKit files. Run createshipyard from a kit checkout, or from the installed createshipyard package.");
+      throw new Error("Could not find the App Shipyard files. Run createshipyard from a kit checkout, or from the installed createshipyard package.");
     }
     dir = parent;
   }

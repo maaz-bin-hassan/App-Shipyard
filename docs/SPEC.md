@@ -1,4 +1,4 @@
-# fastAppshipKit command specification
+# App Shipyard command specification
 
 This document is the contract for slash-command sources, platform manifests, local state, and the compiler. It refines [ADR-003](DECISIONS.md) and [ADR-008](DECISIONS.md): manifests that the linter and compiler read live in `platforms/<id>/platform.json`, and every generated command name starts with `ship-`.
 

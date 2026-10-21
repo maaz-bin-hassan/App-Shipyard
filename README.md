@@ -1,6 +1,6 @@
-# fastAppshipKit
+# App Shipyard
 
-fastAppshipKit is a starter kit for shipping one mobile app with an AI coding agent. You scaffold the app with `createshipyard`, then run the same `/ship-*` commands in Claude Code, Cursor, OpenCode, Google Antigravity, or Codex.
+App Shipyard is a starter kit for shipping one mobile app with an AI coding agent. You scaffold the app with `createshipyard`, then run the same `/ship-*` commands in Claude Code, Cursor, OpenCode, Google Antigravity, or Codex.
 
 Version 1.0.0. The commands, the Expo template, and the CLI tests live in this repository.
 

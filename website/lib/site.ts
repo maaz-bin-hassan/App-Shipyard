@@ -9,7 +9,7 @@ export const siteUrl = resolveSiteUrl();
 export const installCommand = "npx createshipyard my-app";
 
 export const siteDescription =
-  "Install createshipyard from npm and scaffold a mobile app. The slash commands compile for Claude Code, Cursor, and OpenCode. Version 1.0.0.";
+  "App Shipyard scaffolds an Expo app and hands slash commands to your coding agent. Supabase, RevenueCat, PostHog, and Sentry are already in the template. Version 1.0.0.";
 
 function resolveSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
@@ -21,4 +21,4 @@ function resolveSiteUrl(): string {
   return "http://localhost:3000";
 }
 
-export const pitch = "Slash commands for shipping a mobile app with an AI coding agent.";
+export const pitch = "Scaffold the app. Hand it to your agent.";

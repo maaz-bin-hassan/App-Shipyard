@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "AI-agent starter kit for shipping mobile apps. Command contract, compiler, and shared Supabase backend.",
+  "description": "App Shipyard. AI-agent starter kit for shipping mobile apps. Command contract, compiler, and shared Supabase backend.",
   "license": "MIT",
   "engines": {
     "node": ">=20"

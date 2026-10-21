@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Scaffold a fastAppshipKit app. This directory is the source package. npm run pack:npm in the repository root builds the public tarball.",
+  "description": "Scaffold an App Shipyard app. This directory is the source package. npm run pack:npm in the repository root builds the public tarball.",
   "license": "MIT",
   "author": "Maaz Bin Hassan",
   "bin": {

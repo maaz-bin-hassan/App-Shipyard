@@ -1,6 +1,6 @@
 # createshipyard
 
-Scaffold a fastAppshipKit app. Version 1.0.0.
+Scaffold an App Shipyard app. Version 1.0.0.
 
 From a clone of the kit:
 

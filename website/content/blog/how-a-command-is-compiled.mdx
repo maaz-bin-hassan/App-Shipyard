@@ -6,13 +6,13 @@ date: 2026-10-21
 
 ## Version
 
-`createshipyard` 1.0.0 is the package on npm. Scaffold an app with `npx createshipyard my-app`. This note is about the command format.
+App Shipyard 1.0.0 is on npm as `createshipyard`. Scaffold an app with `npx createshipyard my-app`. This note is about the command format.
 
 ## One source, then a merge
 
 A command is two markdown files. The core file says what the command is for, which questions to ask, how to judge it, and what to refuse. The fragment says what must already be true on one platform, which steps to run, and how to undo them.
 
-`scripts/compile-commands.mjs` merges those files and writes `ship-<name>` for the agents you pass. The default list is Claude Code, Cursor, OpenCode, Antigravity, and Codex.
+`npx createshipyard` runs that merge. `--agent claude`, `cursor`, and `opencode` each write that agent. `--agent all` writes Claude Code, Cursor, and OpenCode. The default is Claude Code.
 
 ## What the scaffold copies
 

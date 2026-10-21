@@ -1,6 +1,6 @@
 # Platform adapters
 
-fastAppshipKit will keep each platform adapter in its own directory under `adapters/`. No adapter is implemented yet, and this directory does not contain application templates.
+App Shipyard will keep each platform adapter in its own directory under `adapters/`. No adapter is implemented yet, and this directory does not contain application templates.
 
 ## Planned order
 

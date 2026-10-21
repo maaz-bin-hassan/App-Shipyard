@@ -270,7 +270,7 @@ export async function handleAiProxy(request: Request, config: AiProxyConfig, dep
     headers: {
       Authorization: `Bearer ${config.openRouterApiKey}`,
       "Content-Type": "application/json",
-      "X-Title": "fastAppshipKit",
+      "X-Title": "App Shipyard",
     },
     body: JSON.stringify({
       model,

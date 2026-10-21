@@ -47,7 +47,7 @@ for (const [from, to] of copies) {
 const packed = {
   name: "createshipyard",
   version: cli.version,
-  description: "Scaffold a fastAppshipKit mobile app and compile its slash commands.",
+  description: "Scaffold an App Shipyard mobile app and compile its slash commands.",
   license: "MIT",
   type: "module",
   author: "Maaz Bin Hassan",

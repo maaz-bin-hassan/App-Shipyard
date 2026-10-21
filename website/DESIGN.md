@@ -1,6 +1,6 @@
-# Shipyard website design
+# App Shipyard website design
 
-Tokens for the fastAppshipKit site. Components use these values and nothing outside them.
+Tokens for the App Shipyard site. Components use these values and nothing outside them.
 
 ## Color
 

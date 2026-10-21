@@ -7,7 +7,7 @@ export function TerminalDemo({ transcript }: { transcript: Transcript }) {
   return (
     <div>
       <p className="mb-4 max-w-[68ch] text-muted">
-        Recorded {recorded}. The text below is the process output from that run.
+        Recorded {recorded} with npx createshipyard, --agent cursor, and --no-install. The text below is that process output. The install command on this page installs dependencies.
       </p>
       <div className="terminal-live">
         <TerminalPlayer entries={transcript.entries} plain={plain} />

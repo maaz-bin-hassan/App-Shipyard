@@ -9,10 +9,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: "Shipyard", template: "%s · Shipyard" },
+  title: { default: "App Shipyard", template: "%s · App Shipyard" },
   description: siteDescription,
-  applicationName: "Shipyard",
-  openGraph: { siteName: "Shipyard", type: "website", locale: "en_US" },
+  applicationName: "App Shipyard",
+  openGraph: { siteName: "App Shipyard", type: "website", locale: "en_US" },
 };
 
 export const viewport: Viewport = {

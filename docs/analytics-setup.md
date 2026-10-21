@@ -53,4 +53,4 @@ Source maps upload on EAS Build and on a local release prebuild when `SENTRY_AUT
 
 Initialize Sentry with `enabled: false` until consent is on. `bindSentry` is the crash side of the wrapper. `captureException` does nothing while consent is off.
 
-A test crash is `analytics.captureException(new Error("fastAppshipKit test crash"))` after consent is on, in a build that uploaded source maps. The issue in Sentry should show frames from the original source.
+A test crash is `analytics.captureException(new Error("App Shipyard test crash"))` after consent is on, in a build that uploaded source maps. The issue in Sentry should show frames from the original source.

@@ -6,11 +6,11 @@ The facts below match this repository at version 1.0.0. Delete a sentence if you
 
 ## GitHub Discussions
 
-Title: fastAppshipKit 1.0.0
+Title: App Shipyard 1.0.0
 
 Body:
 
-fastAppshipKit 1.0.0 is the first version of this repository with a scaffold CLI, eleven slash commands, and an Expo template.
+App Shipyard 1.0.0 is the first version of this repository with a scaffold CLI, eleven slash commands, and an Expo template.
 
 `createshipyard` copies that Expo template, compiles the same commands for Claude Code, Cursor, and OpenCode, and writes `.shipkit/state.json`. Antigravity and Codex are compiled by `scripts/compile-commands.mjs`. Flutter, Android native, and iOS native have command files and stub templates. Those three are not buildable projects yet.
 
@@ -22,7 +22,7 @@ License: MIT.
 
 ## Short post (X or LinkedIn)
 
-fastAppshipKit 1.0.0 is a starter kit for one mobile app and an AI coding agent.
+App Shipyard 1.0.0 is a starter kit for one mobile app and an AI coding agent.
 
 The CLI scaffolds an Expo app and writes the same /ship-* commands for Claude Code, Cursor, and OpenCode. Antigravity and Codex read a compiled command file. Flutter, Android, and iOS templates are still stubs.
 
@@ -34,9 +34,9 @@ After `createshipyard` is on npm, you can add: `npx createshipyard my-app`
 
 ## Show HN
 
-Title: Show HN: fastAppshipKit – slash commands that scaffold an Expo app for coding agents
+Title: Show HN: App Shipyard – slash commands that scaffold an Expo app for coding agents
 
-fastAppshipKit is an MIT-licensed kit I built so the same shipping steps can run in more than one coding agent.
+App Shipyard is an MIT-licensed kit I built so the same shipping steps can run in more than one coding agent.
 
 You clone the repo, build `createshipyard`, and point it at a new directory. It copies an Expo template, writes `.shipkit/state.json`, and compiles `/ship-*` commands for Claude Code, Cursor, and OpenCode. The command sources are split into a platform-neutral file and a per-platform fragment. A linter checks that split. Antigravity and Codex are output targets of the same compiler. I have not published the CLI to npm yet; `npm run pack:npm` builds the tarball.
 

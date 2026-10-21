@@ -1,6 +1,6 @@
 # Architecture decisions
 
-These records capture planning decisions for fastAppshipKit. They do not mean the behavior is implemented.
+These records capture planning decisions for App Shipyard. They do not mean the behavior is implemented.
 
 ## ADR-001: Platform selection at setup
 
@@ -63,5 +63,5 @@ These records capture planning decisions for fastAppshipKit. They do not mean th
 ## ADR-008: Slash-command naming
 
 - **Status:** Accepted
-- **Decision:** Every fastAppshipKit command uses the `/ship-` prefix, including `/ship-init`, `/ship-platform`, and `/ship-doctor`. Command names stay the same across supported AI coding agents.
+- **Decision:** Every App Shipyard command uses the `/ship-` prefix, including `/ship-init`, `/ship-platform`, and `/ship-doctor`. Command names stay the same across supported AI coding agents.
 - **Rationale:** A single prefix makes kit commands recognizable and avoids a different command vocabulary for each agent.

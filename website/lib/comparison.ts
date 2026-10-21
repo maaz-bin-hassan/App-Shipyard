@@ -19,7 +19,7 @@ export const comparison: ComparisonRow[] = [
   {
     id: "compile",
     scratch: "Keep a separate copy of the prompt for each agent.",
-    kit: "The compiler merges one core file and one fragment, then writes Claude Code, Cursor, OpenCode, Antigravity, and Codex.",
+    kit: "npx createshipyard merges one core file and one fragment, then writes the commands for Claude Code, Cursor, or OpenCode.",
     evidencePath: "scripts/lib/compile-project.mjs",
   },
   {

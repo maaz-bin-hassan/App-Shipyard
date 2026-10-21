@@ -31,7 +31,7 @@ export function ogImage(title: string) {
           padding: "80px",
         }}
       >
-        <div style={{ display: "flex", fontFamily: "Geist", fontSize: 28, color: "#6B6B64" }}>Shipyard</div>
+        <div style={{ display: "flex", fontFamily: "Geist", fontSize: 28, color: "#6B6B64" }}>App Shipyard</div>
         <div
           style={{
             display: "flex",
