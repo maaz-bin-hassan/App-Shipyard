@@ -3,6 +3,10 @@ title: Writing a command
 description: Add a core file, a fragment, and a manifest entry. Then run the linter.
 ---
 
+## For an app
+
+App authors do not add command files by hand. `npx createshipyard my-app` writes the `/ship-*` commands. The steps below are for a change inside the `createshipyard` package.
+
 ## Add the core file
 
 Create `commands/<name>/COMMAND.md`. The name is kebab-case. Frontmatter has `description` and `argument-hint`, and no other keys. Use `(none)` when the command takes no arguments.

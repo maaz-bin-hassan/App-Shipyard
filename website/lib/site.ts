@@ -1,15 +1,15 @@
 import path from "node:path";
-export { blobUrl, repositoryUrl } from "./links";
+export { blobUrl, npmPackageUrl, repositoryUrl } from "./links";
 
 export const repoRoot = path.resolve(process.cwd(), "..");
 
 /** Baked in at build time. Set NEXT_PUBLIC_SITE_URL before hosting. */
 export const siteUrl = resolveSiteUrl();
 
-export const installCommand = ["pnpm install", "pnpm cli:build", "node cli/dist/index.js my-app"].join("\n");
+export const installCommand = "npx createshipyard my-app";
 
 export const siteDescription =
-  "Build the CLI from this repository and scaffold a mobile app. The same slash commands compile for five coding agents. Version 1.0.0.";
+  "Install createshipyard from npm and scaffold a mobile app. The slash commands compile for Claude Code, Cursor, and OpenCode. Version 1.0.0.";
 
 function resolveSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();

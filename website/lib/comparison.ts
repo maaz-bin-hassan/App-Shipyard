@@ -25,7 +25,7 @@ export const comparison: ComparisonRow[] = [
   {
     id: "scaffold",
     scratch: "Copy a template and remember the platform yourself.",
-    kit: "The scaffold test copies the Expo template, syncs commands, and records kit state.",
+    kit: "npx createshipyard copies the Expo template, writes the slash commands, and records kit state.",
     evidencePath: "cli/src/scaffold.test.ts",
   },
   {

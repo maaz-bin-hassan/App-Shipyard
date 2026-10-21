@@ -56,13 +56,13 @@ export default async function CommandPage({ params }: { params: Promise<{ name: 
   const { prev, next } = neighbors(href, loadCommands());
   const files = command.files.map((file) => `- \`${file}\``).join("\n");
   const usage = [
-    `Run \`/ship-${command.name}\` after the compiler has written it.`,
+    `Install with \`npx createshipyard my-app\`, open \`my-app\`, and run \`/ship-${command.name}\`.`,
     "",
     command.argumentHint === "(none)"
       ? "This command takes no arguments."
       : `The argument hint is \`${command.argumentHint}\`.`,
     "",
-    "`createshipyard --agent` accepts `claude`, `cursor`, `opencode`, or `all`. `all` writes Claude Code, Cursor, and OpenCode. Antigravity and Codex are compiled when those ids are passed to `scripts/compile-commands.mjs`.",
+    "`npx createshipyard my-app --agent` accepts `claude`, `cursor`, `opencode`, or `all`. The default is `claude`. `all` writes Claude Code, Cursor, and OpenCode.",
   ].join("\n");
 
   return (

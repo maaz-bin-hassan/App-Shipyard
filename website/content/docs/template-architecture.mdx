@@ -3,6 +3,10 @@ title: Template architecture
 description: One core command file, one fragment per platform, and a manifest the compiler reads.
 ---
 
+## What you run
+
+`npx createshipyard my-app` copies one platform template and compiles these files into `/ship-*` commands for the agent you pass. The default agent is Claude Code and the default platform is Expo. The sections below are the sources inside the `createshipyard` package.
+
 ## Two files per command
 
 `commands/<name>/COMMAND.md` is platform-neutral. It has frontmatter (`description` and `argument-hint`) plus Goal, Ask, Verify, and Never.

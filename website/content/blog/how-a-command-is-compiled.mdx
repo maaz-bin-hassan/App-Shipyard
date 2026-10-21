@@ -6,7 +6,7 @@ date: 2026-10-21
 
 ## Version
 
-`package.json` is `1.0.0`. The changelog has a `1.0.0` section. Publishing the npm tarball and tagging a GitHub release are separate from that version number. This note is about the command format.
+`createshipyard` 1.0.0 is the package on npm. Scaffold an app with `npx createshipyard my-app`. This note is about the command format.
 
 ## One source, then a merge
 
@@ -16,4 +16,4 @@ A command is two markdown files. The core file says what the command is for, whi
 
 ## What the scaffold copies
 
-`createshipyard` copies one platform template. The default is Expo. The Flutter, Android, and iOS folders are stubs. The scaffold test covers the Expo copy, the compiled commands, and the state file.
+`npx createshipyard` copies one platform template. The default is Expo. The Flutter, Android, and iOS folders are stubs. The package writes the compiled commands and `.shipkit/state.json`.

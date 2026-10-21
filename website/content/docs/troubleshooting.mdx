@@ -1,28 +1,28 @@
 ---
 title: Troubleshooting
-description: Failures the CLI and the command files already describe.
+description: Failures from npx createshipyard and the slash commands.
 ---
 
 ## The CLI cannot find the kit files
 
-From a checkout, run `node cli/dist/index.js` after `pnpm cli:build`. From the packed package, run the `createshipyard` binary. If Node cannot find the templates, the error is that the fastAppshipKit files were not found. The command looks for `platforms/expo/platform.json` next to a `package.json` named `fastappshipkit` or `createshipyard`.
+Install and scaffold with `npx createshipyard my-app`. That runs the `createshipyard` package from npm. If Node cannot find the templates, the error is that the fastAppshipKit files were not found. The command looks for `platforms/expo/platform.json` next to a `package.json` named `createshipyard`.
 
-The directory name has to be a lowercase npm name, such as `my-app`. The CLI also refuses to scaffold inside the kit checkout.
+The directory name has to be a lowercase npm name, such as `my-app`. The folder must be missing or empty.
 
 ## iOS on Windows or Linux
 
-Choosing `ios` when `process.platform` is not `darwin` stops with: iOS native requires macOS and Xcode. Choose `expo`, `flutter`, or `android` on that machine.
+`npx createshipyard my-app --platform ios` stops when `process.platform` is not `darwin`, with: iOS native requires macOS and Xcode. Use `expo`, `flutter`, or `android` on that machine.
 
 ## Update plan needs state
 
-`node scripts/plan-update.mjs` reads `.shipkit/state.json`. If that file is missing, run `createshipyard` or `/ship-start` first. The script prints a plan. It does not edit files.
+`/ship-update` reads `.shipkit/state.json`. `npx createshipyard` writes that file. If it is missing, run `npx createshipyard my-app` or `/ship-start` first. The update plan does not edit files until you answer yes.
 
-## Stubs and the kit repo itself
+## Stubs
 
-The Flutter, Android, and iOS templates say they are not buildable projects yet. `publish` blocks when the root package is not a working Expo app. The kit template is not a buildable app, so publish does not call EAS or open Play Console in this checkout.
+The Flutter, Android, and iOS templates in the package say they are not buildable projects yet. `publish` blocks when the app is not a working Expo project. The command does not call EAS or open Play Console on its own.
 
 ## Toolchain checks
 
-`env-check` reports pass, fail, or skipped. It does not install a toolchain unless you say yes after the failed checks are on screen. Xcode and CocoaPods are skipped off macOS when the install hint starts with `macOS only:`.
+`/ship-env-check` reports pass, fail, or skipped. It does not install a toolchain unless you say yes after the failed checks are on screen. Xcode and CocoaPods are skipped off macOS when the install hint starts with `macOS only:`.
 
-`npm run lint:commands` prints each contract error and exits non-zero. A failed check is not marked done.
+A failed check is not marked done.

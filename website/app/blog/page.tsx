@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { loadPosts } from "@/lib/docs";
 
-const description = "Notes on the kit. One post. There is no release yet.";
+const description = "Notes on the kit. One post about how a slash command is compiled.";
 
 export const metadata: Metadata = {
   title: "Blog",

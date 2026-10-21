@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 };
 
 const steps = [
-  { number: "01", title: "Type a command", text: "Run the CLI, then a /ship-* command in the agent." },
-  { number: "02", title: "Answer questions", text: "The command asks once and stores the answers in .shipkit/state.json." },
-  { number: "03", title: "Agent wires it", text: "The agent follows that platform's fragment and edits the files it names." },
+  { number: "01", title: "Scaffold", text: "Run npx createshipyard my-app. Node.js 20 or newer and Git are enough." },
+  { number: "02", title: "Open the folder", text: "cd my-app, then open it in Claude Code, Cursor, or OpenCode." },
+  { number: "03", title: "Run /ship-start", text: "The command asks once and stores the answers in .shipkit/state.json." },
 ];
 
 const stack = [
@@ -40,14 +40,16 @@ export default function HomePage() {
           {pitch}
         </h1>
         <p className="mt-6 max-w-[62ch] text-[18px] text-muted">
-          Version 1.0.0. Build the CLI from this repository, then scaffold one platform. The same commands compile
-          for Claude Code, Cursor, OpenCode, Antigravity, and Codex.
+          Version 1.0.0 is on npm as createshipyard. One command scaffolds an Expo app and writes /ship-* commands
+          for Claude Code. Pass --agent cursor or --agent opencode to write those agents too.
         </p>
         <div className="mt-8 max-w-[640px]">
-          <CodeBlock code={installCommand} language="bash" label="bash" copyLabel="Copy" copyVariant="primary" />
+          <CodeBlock code={installCommand} language="bash" label="Install" copyLabel="Copy" copyVariant="primary" />
         </div>
-        <p className="mt-4">
-          <Link href="/docs/">Docs</Link>
+        <p className="mt-4 max-w-[62ch] text-muted">
+          That creates my-app, installs its dependencies, and prints the next step: open the folder and run
+          /ship-start. The{" "}
+          <Link href="/docs/">install guide</Link> covers agents, platforms, and the directory name.
         </p>
       </section>
 
@@ -140,9 +142,8 @@ export default function HomePage() {
           <details>
             <summary>Which agents work?</summary>
             <p>
-              The compiler writes Claude Code, Cursor, OpenCode, Antigravity, and Codex. createshipyard --agent accepts
-              claude, cursor, opencode, or all. all writes the first three. Pass antigravity or codex to
-              scripts/compile-commands.mjs for the other two.
+              npx createshipyard my-app --agent accepts claude, cursor, opencode, or all. The default is claude.
+              all writes Claude Code, Cursor, and OpenCode. Open the new folder and run /ship-start.
             </p>
           </details>
           <details>
