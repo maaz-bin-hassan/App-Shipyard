@@ -3,9 +3,9 @@ title: Troubleshooting
 description: Failures the CLI and the command files already describe.
 ---
 
-## The CLI is not on npm
+## The CLI cannot find the kit files
 
-`createshipyard` runs from this checkout. If Node cannot find the kit, the error is that the package is not published and the command has to run from the repository.
+From a checkout, run `node cli/dist/index.js` after `pnpm cli:build`. From the packed package, run the `createshipyard` binary. If Node cannot find the templates, the error is that the fastAppshipKit files were not found. The command looks for `platforms/expo/platform.json` next to a `package.json` named `fastappshipkit` or `createshipyard`.
 
 The directory name has to be a lowercase npm name, such as `my-app`. The CLI also refuses to scaffold inside the kit checkout.
 

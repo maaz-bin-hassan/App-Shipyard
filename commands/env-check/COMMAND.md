@@ -11,11 +11,11 @@ Report pass or fail for every toolchain check in the selected platform manifest,
 
 No platform or store questions. Read `platform` and `storeTargets` from `.shipkit/state.json`.
 
-The checks come first. If every check passes or is skipped, ask nothing. If any check fails, then ask once: may those install hints be run? Wait for an explicit yes. A refusal leaves the command `blocked`.
+The checks come first. If every check passes or is skipped, ask nothing and leave `answers.runInstallHints` unset. If any check fails and `answers.runInstallHints` is missing, ask once: may those install hints be run? Record `yes` or `no`. Wait for an explicit yes before running a hint. A refusal is `no` and leaves the command `blocked`. On resume, reuse `answers.runInstallHints` and do not ask again.
 
 ## Verify
 
-The report lists every `envChecks` entry as pass, fail, or skipped. A pass means `expected` appears in the combined stdout and stderr and the reported version satisfies that entry's `Minimum:`. Windows and Linux hints that start with `macOS only:` are skipped when the OS is not macOS. The command is `done` only when every entry passed or was skipped. Each failure includes the install hint for the current OS. The transcript and state file contain no values from `.env` or other secrets.
+The report lists every `envChecks` entry as pass, fail, or skipped. A pass means `expected` appears in the combined stdout and stderr and the reported version satisfies that entry's `Minimum:`. Windows and Linux hints that start with `macOS only:` are skipped when the OS is not macOS. The command is `done` only when every entry passed or was skipped. Each failure includes the install hint for the current OS. When any check failed, `answers.runInstallHints` is `yes` or `no`. When every check passed or was skipped, that key is absent. The transcript and state file contain no values from `.env` or other secrets.
 
 Version rules:
 

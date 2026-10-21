@@ -1,6 +1,8 @@
 # createshipyard
 
-Scaffold a fastAppshipKit app from this repository. The package is `private` and is not published to npm.
+Scaffold a fastAppshipKit app. Version 1.0.0.
+
+From a clone of the kit:
 
 ```bash
 pnpm cli:build
@@ -15,4 +17,4 @@ Default agent text:
 Open this folder in Claude Code and run /ship-start
 ```
 
-Publishing later means packing the templates, `scripts/sync-project.mjs`, and the compiler with this package, removing `"private": true`, and enabling `.github/workflows/release.yml`. Do not publish from this tree as it stands. `cli/dist` is build output and does not contain the templates.
+This directory stays `"private": true` so `npm publish` here does not upload a package that lacks the templates. From the repository root, `npm run pack:npm` builds the CLI and writes `release/createshipyard-1.0.0.tgz`. Publish that tarball when you want the package on npm. Do not publish from this tree by itself.

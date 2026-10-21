@@ -1,6 +1,6 @@
 # Contributing to fastAppshipKit
 
-Thanks for your interest in fastAppshipKit. The repository is in early development. APIs, commands, and architecture may change.
+Thanks for your interest in fastAppshipKit. The repository version is 1.0.0. Commands and architecture can still change. Read [docs/SPEC.md](docs/SPEC.md) before editing `commands/` or `platforms/`.
 
 ## Originality and intellectual property
 
@@ -14,7 +14,7 @@ Do not add API keys, credentials, tokens, or private environment files.
 
 You need Git. Use the toolchain for the area you change:
 
-- JavaScript and Expo work should use pnpm when a package manager is required. This repository does not install dependencies yet.
+- JavaScript and Expo work should use pnpm 10. `pnpm install --frozen-lockfile` matches CI.
 - Flutter work needs the Flutter SDK.
 - Android work needs Android Studio, a JDK, and the Android SDK.
 - iOS work needs Xcode on macOS.

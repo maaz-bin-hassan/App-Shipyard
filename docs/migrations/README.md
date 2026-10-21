@@ -6,13 +6,13 @@ In this repository the release notes are `CHANGELOG.md` and the package version 
 
 `node scripts/plan-update.mjs` prints the plan. It does not edit files.
 
-This repository is still `0.0.0`. The sample below is the shape of the next bump. It is not a live guide, so `ship-update` does not apply it.
+This repository is `1.0.0`. There is no `docs/migrations/1.0.0.md`. A checkout whose `kitVersion` is `0.0.0` moves to `1.0.0` with an empty migration list. The sample below is the shape of the next bump. It is not a live guide, so `ship-update` does not apply it.
 
-## How to bump to 0.1.0
+## How to bump to the next version
 
-1. Add `docs/migrations/0.1.0.md` using the sample in the next section. List only kit-owned paths under `## Changes`. Do not name feature files the developer owns, such as `src/screens/`, unless that exact file must change.
-2. In `CHANGELOG.md`, move the notes that are shipping out of `## [Unreleased]` and put them under `## [0.1.0] - YYYY-MM-DD`. Leave a new empty `## [Unreleased]` section.
-3. Set `version` to `0.1.0` in `package.json` and `cli/package.json`.
+1. Add `docs/migrations/<version>.md` using the sample in the next section. `<version>` is `major.minor.patch`. List only kit-owned paths under `## Changes`. Do not name feature files the developer owns, such as `src/screens/`, unless that exact file must change.
+2. In `CHANGELOG.md`, move the notes that are shipping out of `## [Unreleased]` and put them under `## [<version>] - YYYY-MM-DD`. Leave a new empty `## [Unreleased]` section.
+3. Set `version` to that same value in `package.json`, `cli/package.json`, and `website/package.json`.
 4. Do not hand-edit a project's `.shipkit/state.json`. `ship-update` writes `kitVersion` after the guide applies, and only after the developer answers `yes`.
 
 A generated app picks up the new notes when someone replaces `docs/kit/CHANGELOG.md`, `docs/kit/version.json`, and `docs/migrations` from the new kit checkout. That copy must not overwrite feature code.

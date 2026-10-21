@@ -82,6 +82,16 @@ export async function syncProject({ dest, platform, agents, appName, application
   await copyFile(path.join(kitRoot, "scripts", "plan-update.mjs"), path.join(dest, "scripts", "plan-update.mjs"));
   await copyFile(path.join(kitRoot, "scripts", "lib", "update-plan.mjs"), path.join(dest, "scripts", "lib", "update-plan.mjs"));
 
+  await copyFile(manifestPath, path.join(dest, "docs", "kit", "platform.json"));
+  await copyFile(
+    path.join(kitRoot, "scripts", "android-sdk-platform.mjs"),
+    path.join(dest, "scripts", "android-sdk-platform.mjs"),
+  );
+  for (const name of ["billing-setup.md", "play-console-checklist.md", "analytics-setup.md", "backend.md", "events.md"]) {
+    await copyFile(path.join(kitRoot, "docs", name), path.join(dest, "docs", name));
+  }
+  await copyTree(path.join(kitRoot, "backend"), path.join(dest, "backend"));
+
   await compileProject({
     sourceRoot: kitRoot,
     outRoot: dest,
@@ -95,7 +105,8 @@ async function copyTree(source, dest) {
   await mkdir(dest, { recursive: true });
   const entries = await readdir(source, { withFileTypes: true });
   for (const entry of entries) {
-    if (entry.name === ".git" || entry.name === "node_modules" || entry.name === ".env") continue;
+    if (entry.name === ".git" || entry.name === "node_modules" || entry.name === ".temp" || entry.name === ".branches") continue;
+    if (entry.name === ".env" || (entry.name.startsWith(".env.") && entry.name !== ".env.example")) continue;
     const from = path.join(source, entry.name);
     const to = path.join(dest, entry.name);
     if (entry.isDirectory()) {

@@ -3,9 +3,13 @@
 All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
-This project has no release yet. Future releases are intended to follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+Nothing since 1.0.0.
+
+## [1.0.0] - 2026-10-21
 
 ### Added
 

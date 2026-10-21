@@ -21,9 +21,11 @@ describe("createshipyard scaffold", () => {
       assert.match(result.stdout, /Open this folder in Claude Code, Cursor, or OpenCode and run \/ship-start/);
       assert.match(result.stdout, /Dependencies were not installed \(--no-install\)/);
 
+      const kitPackage = JSON.parse(await readFile(path.join(kitRoot, "package.json"), "utf8")) as { version: string };
       const state = JSON.parse(await readFile(path.join(dest, ".shipkit", "state.json"), "utf8"));
       assert.equal(state.platform, "expo");
-      assert.equal(state.kitVersion, "0.0.0");
+      assert.equal(state.kitVersion, kitPackage.version);
+      assert.equal(kitPackage.version, "1.0.0");
       assert.deepEqual(state.storeTargets, []);
       assert.deepEqual(state.answers, {});
 
@@ -48,12 +50,17 @@ describe("createshipyard scaffold", () => {
       await readFile(path.join(dest, ".git", "HEAD"), "utf8");
 
       const version = JSON.parse(await readFile(path.join(dest, "docs", "kit", "version.json"), "utf8"));
-      assert.equal(version.version, "0.0.0");
+      assert.equal(version.version, "1.0.0");
+      const manifest = JSON.parse(await readFile(path.join(dest, "docs", "kit", "platform.json"), "utf8"));
+      assert.equal(manifest.id, "expo");
+      await readFile(path.join(dest, "scripts", "android-sdk-platform.mjs"), "utf8");
+      await readFile(path.join(dest, "docs", "play-console-checklist.md"), "utf8");
+      await readFile(path.join(dest, "backend", "supabase", "functions", "ai-proxy", "handler.ts"), "utf8");
       const plan = await run(process.execPath, [path.join(dest, "scripts", "plan-update.mjs")], dest);
       assert.equal(plan.code, 0, plan.stderr);
       const parsed = JSON.parse(plan.stdout);
-      assert.equal(parsed.kitVersion, "0.0.0");
-      assert.equal(parsed.latest, "0.0.0");
+      assert.equal(parsed.kitVersion, "1.0.0");
+      assert.equal(parsed.latest, "1.0.0");
       assert.deepEqual(parsed.migrations, []);
       assert.equal(parsed.rootKind, "app");
 

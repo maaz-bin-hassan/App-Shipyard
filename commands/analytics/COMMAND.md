@@ -20,8 +20,9 @@ Ask these three questions in one batch before Steps. On resume, reuse `answers` 
 | `posthogHost` | Which PostHog ingest host should the app use? | `https://us.i.posthog.com` or `https://eu.i.posthog.com`. |
 | `sentryOrganization` | What is the Sentry organization slug? | Non-empty string. |
 | `sentryProject` | What is the Sentry project slug? | Non-empty string. |
+| `sentryTokenNameSet` | Will the name `SENTRY_AUTH_TOKEN` be set on the EAS build profile before the live crash check? Do not paste the token. | `yes` or `no`. |
 
-Do not ask for the PostHog project key, the Sentry DSN, or `SENTRY_AUTH_TOKEN`. Those belong in `.env` or in EAS. Do not record them in `answers`.
+Do not ask for the PostHog project key, the Sentry DSN, or `SENTRY_AUTH_TOKEN`. Those belong in `.env` or in EAS. Do not record them in `answers`. On resume, reuse `answers.sentryTokenNameSet` and do not ask again.
 
 ## Verify
 
@@ -29,7 +30,7 @@ Do not ask for the PostHog project key, the Sentry DSN, or `SENTRY_AUTH_TOKEN`. 
 
 With consent off, `track`, `identify`, `screen`, and `captureException` do not call PostHog or Sentry. `reset` still clears the identified user. The settings control is the only place that turns consent on.
 
-The command is `done` only when a consented build shows one catalog event in PostHog and a test crash in Sentry whose stack frames resolve through the uploaded source maps. `answers.posthogHost` is one of the two hosts. The transcript and state file contain no project keys, DSNs, or auth tokens.
+The command is `done` only when a consented build shows one catalog event in PostHog and a test crash in Sentry whose stack frames resolve through the uploaded source maps. `answers.posthogHost` is one of the two hosts. `answers.sentryTokenNameSet` is `yes` or `no`, and the token value is absent. The transcript and state file contain no project keys, DSNs, or auth tokens.
 
 ## Never
 

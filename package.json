@@ -1,7 +1,7 @@
 {
   "name": "fastappshipkit",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "AI-agent starter kit for shipping mobile apps. Command contract, compiler, and shared Supabase backend.",
   "license": "MIT",
@@ -17,6 +17,7 @@
     "test:cli": "tsc -p cli/tsconfig.json && node --test cli/dist/args.test.js cli/dist/scaffold.test.js scripts/lib/update-plan.test.mjs",
     "test": "npm run test:cli && npm run test:backend && npm run test:billing && npm run test:analytics && npm run test:ai && npm run test:permissions && npm run test:design && npm run test:i18n && npm run test:legal",
     "smoke": "bash scripts/e2esmoke.sh",
+    "pack:npm": "node scripts/pack-npm.mjs",
     "test:backend": "node --test backend/supabase/tests/*.test.ts",
     "test:billing": "node --experimental-strip-types --test platforms/expo/template/src/features/billing/useEntitlement.test.ts platforms/expo/template/src/features/billing/paywall.test.ts",
     "test:analytics": "node --experimental-strip-types --test platforms/expo/template/src/lib/analytics.test.ts",

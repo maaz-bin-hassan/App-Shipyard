@@ -1,10 +1,9 @@
 name: Release
 
-# Disabled. This job does not run, and the publish step is a dry run.
-# To enable later: set `if` to true, remove `"private": true` from
-# cli/package.json, pack the templates and scripts with the CLI, and
-# replace `--dry-run` with a real publish. Do not publish from the
-# current tree. createshipyard stays off npm until that work is done.
+# Disabled. This job does not run. The publish step is a dry run of the
+# tarball from npm run pack:npm. To publish for real: set `if` to true,
+# remove `--dry-run`, and provide NPM_TOKEN. Do not run this until you
+# mean to put createshipyard on the registry.
 on:
   workflow_dispatch:
 
@@ -34,11 +33,10 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile
 
-      - name: Build CLI
-        run: pnpm cli:build
+      - name: Pack
+        run: pnpm pack:npm
 
       - name: Dry run only
-        working-directory: cli
-        run: npm publish --dry-run --access public
+        run: npm publish release/createshipyard-1.0.0.tgz --dry-run --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

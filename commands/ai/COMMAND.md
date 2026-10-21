@@ -17,14 +17,15 @@ Ask these two questions in one batch before Steps. On resume, reuse `answers` an
 | --- | --- | --- |
 | `modelAllowlist` | Which OpenRouter model ids may the app call? Comma-separated exact ids. | Non-empty string. Example shape: `openai/gpt-4o-mini`. |
 | `dailyRequestLimit` | How many AI requests may one signed-in user make per UTC day? | Integer from 1 to 1000000. |
+| `aiSecretNamesSet` | Will you set `AI_MODEL_ALLOWLIST`, `AI_DAILY_REQUEST_LIMIT`, and `OPENROUTER_API_KEY` as Supabase secrets, without pasting the key here? | `yes` or `no`. |
 
-Do not ask for `OPENROUTER_API_KEY`. Do not write it into `answers`.
+Do not ask for `OPENROUTER_API_KEY`. Do not write it into `answers`. On resume, reuse `answers.aiSecretNamesSet` and do not ask again.
 
 ## Verify
 
 `answers.modelAllowlist` is a non-empty comma-separated list and `answers.dailyRequestLimit` is an integer from 1 to 1000000. No client file contains `OPENROUTER_API_KEY` or a request to `openrouter.ai`. `pnpm test:ai` passes. `pnpm test:backend` passes, including the daily limiter and the proxy's rejection of a missing session.
 
-The command is `done` only when a signed-in session receives a stream from `ai-proxy` and a call without a session returns `401` without reaching OpenRouter. The transcript and state file contain no provider key and no service-role key.
+The command is `done` only when a signed-in session receives a stream from `ai-proxy` and a call without a session returns `401` without reaching OpenRouter. `answers.aiSecretNamesSet` is `yes` or `no`, and the provider key is absent. The transcript and state file contain no provider key and no service-role key.
 
 ## Never
 

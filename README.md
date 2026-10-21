@@ -1,73 +1,85 @@
 # fastAppshipKit
 
-![Project status](https://img.shields.io/badge/status-in%20development-orange)
+fastAppshipKit is a starter kit for shipping one mobile app with an AI coding agent. You scaffold the app with `createshipyard`, then run the same `/ship-*` commands in Claude Code, Cursor, OpenCode, Google Antigravity, or Codex.
 
-fastAppshipKit is an open-source starter kit for shipping mobile apps with AI coding agents. A developer chooses a platform, scaffolds an app with `createshipyard`, then uses slash commands in Claude Code, Cursor, OpenCode, or a similar agent. The CLI is in this repository and is not published to npm yet.
+Version 1.0.0. The commands, the Expo template, and the CLI tests live in this repository.
 
-> **Work in progress.** This repository is a foundation only. Commands, APIs, file layouts, and architecture may change before the first usable release. Do not treat the decisions in `docs/DECISIONS.md` as a stable public API.
+## 60-second quick start
 
-## Supported platforms
-
-The kit is planned to target one platform per generated app:
-
-1. **React Native (Expo)**
-2. **Flutter**
-3. **Android native** — Kotlin and Jetpack Compose
-4. **iOS native** — Swift and SwiftUI
-
-The adapter order is Expo, then Flutter, then Android native, then iOS native. `createshipyard` copies the Expo template by default. The Flutter, Android, and iOS templates are still stubs.
-
-## Installation and usage
-
-From this checkout, build the CLI and create an app:
+You need Git and Node.js. The Expo env-check accepts Node.js 22.13 or newer on the 22 line, 24.3 or newer on the 24 line, or an even major of 26 or newer. CI installs dependencies with pnpm 10.
 
 ```bash
+git clone https://github.com/maaz-bin-hassan/FastAppShip-kit.git
+cd FastAppShip-kit
 pnpm install
 pnpm cli:build
 node cli/dist/index.js my-app
 ```
 
-`node cli/dist/index.js my-app` copies the Expo template, compiles slash commands, writes `AGENTS.md`, initializes git, installs npm dependencies, and prints the next step: open the folder in Claude Code and run `/ship-start`. Flags:
+That copies the Expo template, compiles the slash commands, writes `AGENTS.md` and `.shipkit/state.json`, initializes git, and installs the app dependencies. Then open `my-app` in the agent you selected and run `/ship-start`.
+
+Flags:
 
 - `--agent claude|cursor|opencode|all` (default `claude`)
 - `--platform expo|flutter|android|ios` (default `expo`)
 - `--pm npm|pnpm|yarn` (default `npm`)
 - `--no-install`
 
-`/ship-init`, `/ship-platform`, and `/ship-doctor` are reserved names and are not implemented. `ship-update` compares `.shipkit/state.json` `kitVersion` with the release notes and applies `docs/migrations/<version>.md`. See [docs/migrations/README.md](docs/migrations/README.md) for a version bump. The package is not on npm. The release workflow in `.github/workflows/release.yml` does not run.
+`ios` is refused when `node -p process.platform` is not `darwin`.
 
-The command contract and the compiler:
+`npm run pack:npm` writes `release/createshipyard-1.0.0.tgz`. That tarball is the npm package. It is not on the npm registry until it is published. After it is published, the scaffold command is `npx createshipyard my-app`.
 
-- `npm run lint:commands` checks command files, platform fragments, and manifests. `pnpm run lint:commands` runs the same script.
-- `npm run compile -- --platform flutter` merges `env-check` for Flutter into each agent's project command location.
+The step-by-step check is [docs/TESTING.md](docs/TESTING.md).
 
-`env-check` documents a toolchain check. It does not install tools. See [docs/SPEC.md](docs/SPEC.md).
+## What is included
 
-`plan-pricing` writes `docs/monetization.md` and stores the recommended entitlement and product ids in `.shipkit/state.json`. `paywall` adds the Expo RevenueCat screen in `platforms/expo/template/src/features/billing`. Live Play Console products wait for an explicit yes. The doc citations are in [docs/billing-setup.md](docs/billing-setup.md). `pnpm test:billing` runs the entitlement tests.
+The Expo path is the one `createshipyard` copies by default. These commands have core files and an Expo fragment:
 
-`analytics` adds the PostHog and Sentry wrapper in `platforms/expo/template/src/lib` and writes [docs/events.md](docs/events.md). Consent starts off and disables both. `pnpm test:analytics` covers that flag. EAS source maps are documented in [docs/analytics-setup.md](docs/analytics-setup.md).
+| Command | What it does |
+| --- | --- |
+| `start` | Saves the platform, the app identity, and the store targets, then runs env-check. |
+| `env-check` | Runs the toolchain commands in the platform manifest. It installs a tool only after an explicit yes. |
+| `plan-pricing` | Writes `docs/monetization.md` and the entitlement ids. It does not create store products. |
+| `paywall` | Gates premium features with the RevenueCat module in the Expo template. Live store products wait for an explicit yes. |
+| `analytics` | Adds the PostHog and Sentry wrapper. Consent starts off. |
+| `ai` | Records the model allowlist and the daily limit. The app calls the Supabase proxy, not OpenRouter. |
+| `design` | Rebuilds screens from screenshots, a Figma frame, or a Stitch export using theme tokens. |
+| `translate` | Puts user-facing strings in locale JSON. The agent writes the translations. Urdu and Arabic use RTL. |
+| `legal` | Drafts a privacy policy and Play Data safety answers from the code. The draft says it is not legal advice. |
+| `publish` | Walks a working app to a Google Play internal test. Each console action waits for an explicit yes. It stops at internal testing. |
+| `update` | Applies `docs/migrations/<version>.md` after a git checkpoint. |
 
-`ai` records the model allowlist and the daily limit. The Expo hooks in `platforms/expo/template/src/features/ai` call the Supabase proxy and do not call OpenRouter. `pnpm test:ai` covers the client. `pnpm test:backend` covers the session check and the daily limiter.
+`pnpm test` runs the CLI scaffold test, the Supabase row-level-security and daily-limit tests, and the Expo template tests for billing, analytics, AI, permissions, design, i18n, and the legal draft. `scripts/e2esmoke.sh` scaffolds an Expo app, then runs `tsc --noEmit` and `expo export --platform android`.
 
-Pre-permission screens for camera, photos, notifications, location, microphone, contacts, calendar, and Bluetooth are in `platforms/expo/template/src/features/permissions`. `pnpm test:permissions` covers the hook. There is no slash command for them.
+The shared Supabase schema and the OpenRouter proxy are in `backend/supabase/`. The OpenRouter key is a Supabase secret. It is not in the mobile app.
 
-`design` rebuilds screens from screenshots, a Figma frame, or a Stitch export. Screens use `src/theme` tokens and the components in `src/ui`. Real data is wired only when the developer names it. Otherwise the screen reads a typed mock through `DataSource`. `pnpm test:design` covers that builder.
+## Supported agents
 
-`translate` keeps user-facing copy in `src/i18n/locales`. The agent writes the other languages. It does not call a translation API. Urdu and Arabic use right-to-left layout. `pnpm test:i18n` covers the catalog, the language switch, and those two layouts.
+| Agent | Project file | How you invoke it |
+| --- | --- | --- |
+| Claude Code | `.claude/commands/ship-<name>.md` | `/ship-<name>` |
+| Cursor | `.cursor/commands/ship-<name>.md` | `/ship-<name>` |
+| OpenCode | `.opencode/commands/ship-<name>.md` | `/ship-<name>` |
+| Google Antigravity | `.agents/skills/ship-<name>/SKILL.md` | `/ship-<name>` |
+| Codex | The merged command in `AGENTS.md` | Ask for `ship-<name>` |
 
-`legal` writes `docs/legal/privacy-policy.md` and `docs/legal/data-safety-answers.md` from the Expo app config, the template dependencies, `docs/events.md`, and the Supabase schema. The policy says it was generated from code and is not legal advice. A rerun lists what changed. `pnpm test:legal` checks that every template dependency is named.
+`createshipyard --agent all` writes Claude Code, Cursor, and OpenCode. Antigravity and Codex are written by:
 
-`publish` walks a working app to a Google Play internal test. Listing copy goes in `fastlane/metadata/android`. Every Play Console action waits for an explicit yes. Asset sizes and click paths are in [docs/play-console-checklist.md](docs/play-console-checklist.md). The command stops at internal testing.
+```bash
+node scripts/compile-commands.mjs --platform expo --agents antigravity,codex
+```
 
-## Shared backend
+## Roadmap
 
-Every platform will call one Supabase backend. The schema, the daily AI limit, and the OpenRouter proxy are in `backend/supabase/`. [docs/backend.md](docs/backend.md) has the setup commands and the HTTP contract.
+iOS native commands and the env-check are in `platforms/ios`. The template is the README in `platforms/ios/template`. There is no tested SwiftUI app in this repository. Building that path needs macOS and Xcode.
 
-The OpenRouter key stays in Supabase secrets. It does not belong in a mobile app. The files in this repo do not create a hosted project or set that key.
+The Flutter commands are in `platforms/flutter`. The template is the README in `platforms/flutter/template`. There is no tested Flutter project in this repository.
+
+The Android native commands are in `platforms/android`. The template is the README in `platforms/android/template`. There is no tested Kotlin project in this repository. The Play internal-test steps are written for a working app and have not been executed against a Play Console account from this repo.
 
 ## Contributing
 
-Contributions are welcome once you have read [CONTRIBUTING.md](CONTRIBUTING.md). In particular, do not contribute copied material from paid or closed-source starter kits.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. Do not contribute copied material from paid or closed-source starter kits.
 
 ## License
 

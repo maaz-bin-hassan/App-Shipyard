@@ -92,7 +92,7 @@ Flutter has both an Android manifest and an iOS `Info.plist`. The schema stores 
 {
   "platform": "flutter",
   "storeTargets": ["play", "appstore"],
-  "kitVersion": "0.0.0",
+  "kitVersion": "1.0.0",
   "answers": {},
   "commands": {
     "env-check": {
@@ -169,7 +169,7 @@ Checked against current vendor docs on 2026-10-20. The config object in `scripts
 
 ## Scaffold
 
-`createshipyard` lives in `cli/`. It is not published. From this repository, `pnpm cli:build` then `node cli/dist/index.js my-app` copies `platforms/<id>/template` by running `scripts/sync-project.mjs`, writes a project `AGENTS.md` and `.shipkit/state.json`, initializes git, installs dependencies, and prints the next slash command.
+`createshipyard` lives in `cli/`. From this repository, `pnpm cli:build` then `node cli/dist/index.js my-app` copies `platforms/<id>/template` by running `scripts/sync-project.mjs`, writes a project `AGENTS.md` and `.shipkit/state.json`, initializes git, installs dependencies, and prints the next slash command. `npm run pack:npm` builds `release/createshipyard-1.0.0.tgz`. That tarball is the package to publish. It is not on the npm registry until someone publishes it.
 
 Flags are `--agent` (`claude`, `cursor`, `opencode`, or `all`), `--platform` (`expo` by default, or `flutter`, `android`, `ios`), `--pm` (`npm`, `pnpm`, or `yarn`), and `--no-install`. The default platform is `expo`. `ios` is refused when `process.platform` is not `darwin`.
 
@@ -181,4 +181,4 @@ Flags are `--agent` (`claude`, `cursor`, `opencode`, or `all`), `--platform` (`e
 
 `node scripts/plan-update.mjs` prints `kitVersion`, `latest`, `ahead`, and `migrations`. It does not edit files. Before applying a guide, the command creates branch `ship-update-checkpoint-<stamp>` and writes `.shipkit/update-checkpoint.json` with `branch`, `head`, and `stashed`. That file stays under `.shipkit/`, which is gitignored. A guide may name only the files it changes. Rollback is `git reset --hard` on the recorded `head`.
 
-How to write the next version bump is in [docs/migrations/README.md](migrations/README.md). This repository is still `0.0.0`.
+How to write the next version bump is in [docs/migrations/README.md](migrations/README.md). This repository is `1.0.0`. There is no `docs/migrations/1.0.0.md` because this is the first numbered release.

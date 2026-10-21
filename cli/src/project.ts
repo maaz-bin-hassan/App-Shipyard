@@ -49,19 +49,18 @@ export function findKitRoot(startDir: string): string {
   let dir = path.resolve(startDir);
   for (;;) {
     const pkgPath = path.join(dir, "package.json");
-    if (existsSync(pkgPath)) {
+    const manifest = path.join(dir, "platforms", "expo", "platform.json");
+    if (existsSync(pkgPath) && existsSync(manifest)) {
       try {
         const pkg = JSON.parse(readFileSync(pkgPath, "utf8")) as { name?: string };
-        if (pkg.name === "fastappshipkit" && existsSync(path.join(dir, "platforms", "expo", "platform.json"))) {
-          return dir;
-        }
+        if (pkg.name === "fastappshipkit" || pkg.name === "createshipyard") return dir;
       } catch {
         // Keep walking when a package.json is unreadable.
       }
     }
     const parent = path.dirname(dir);
     if (parent === dir) {
-      throw new Error("Could not find the fastAppshipKit checkout. createshipyard runs from this repository and is not published to npm.");
+      throw new Error("Could not find the fastAppshipKit files. Run createshipyard from a kit checkout, or from the installed createshipyard package.");
     }
     dir = parent;
   }

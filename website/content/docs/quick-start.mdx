@@ -1,6 +1,6 @@
 ---
 title: Quick start
-description: Build the CLI from this repository and scaffold an app. The package is not on npm.
+description: Build the CLI from this repository and scaffold an app. Version 1.0.0.
 ---
 
 ## Build the CLI
@@ -14,6 +14,8 @@ node cli/dist/index.js my-app
 ```
 
 That copies the Expo template, compiles slash commands, writes `AGENTS.md` and `.shipkit/state.json`, initializes git, and installs dependencies. Pass `--no-install` to skip the install.
+
+`npm run pack:npm` writes `release/createshipyard-1.0.0.tgz`. That file is the npm package. It is not on the registry until it is published. After that publish, `npx createshipyard my-app` is the same scaffold.
 
 ## Flags
 

@@ -1,6 +1,10 @@
 {
   "name": "shipyard-website",
+  "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

@@ -40,8 +40,8 @@ export default function HomePage() {
           {pitch}
         </h1>
         <p className="mt-6 max-w-[62ch] text-[18px] text-muted">
-          Build the CLI from this repository, then scaffold one platform. The same commands compile for Claude Code,
-          Cursor, OpenCode, Antigravity, and Codex. The package is not on npm.
+          Version 1.0.0. Build the CLI from this repository, then scaffold one platform. The same commands compile
+          for Claude Code, Cursor, OpenCode, Antigravity, and Codex.
         </p>
         <div className="mt-8 max-w-[640px]">
           <CodeBlock code={installCommand} language="bash" label="bash" copyLabel="Copy" copyVariant="primary" />
@@ -162,8 +162,8 @@ export default function HomePage() {
       <section className="pb-14 md:pb-[88px]">
         <h2 className="mb-4 text-[24px] font-semibold">Contribute</h2>
         <p className="max-w-[68ch]">
-          The repository is in early development. Read the contributing guide before a pull request. Contributions have
-          to be original. Do not paste material from paid or closed-source starter kits.
+          Read the contributing guide before a pull request. Contributions have to be original. Do not paste material
+          from paid or closed-source starter kits.
         </p>
         <p className="mt-4 flex flex-col gap-2">
           <a href={repositoryUrl} rel="noreferrer">

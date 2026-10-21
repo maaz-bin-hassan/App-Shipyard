@@ -122,6 +122,7 @@ website/out/
 
 # Generated distribution output
 dist/
+release/
 tmp/
 temp/
 *.tmp
