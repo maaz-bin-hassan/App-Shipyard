@@ -1,0 +1,30 @@
+---
+title: Template architecture
+description: One core command file, one fragment per platform, and a manifest the compiler reads.
+---
+
+## Two files per command
+
+`commands/<name>/COMMAND.md` is platform-neutral. It has frontmatter (`description` and `argument-hint`) plus Goal, Ask, Verify, and Never.
+
+`platforms/<id>/fragments/<name>.md` is the platform half. It has Preconditions, Steps, and Rollback. It has no frontmatter.
+
+The compiler merges them into Goal, Preconditions, Ask, Steps, Verify, Rollback, Never, and prefixes the name with `ship-`.
+
+## The manifest
+
+Each platform has `platforms/<id>/platform.json`. The id is `expo`, `flutter`, `android`, or `ios`. The `commands` array is the list the linter and compiler use. A listed command needs a fragment. A fragment that is not listed is an error.
+
+Naming a service in the manifest does not mean that SDK is installed on every platform. The Expo template is the one with the paywall, analytics, and AI modules. The other three templates say they are not buildable yet.
+
+## Where the compiler writes
+
+| Agent | Output |
+| --- | --- |
+| claude-code | `.claude/commands/ship-<name>.md` |
+| cursor | `.cursor/commands/ship-<name>.md` |
+| opencode | `.opencode/commands/ship-<name>.md` |
+| antigravity | `.agents/skills/ship-<name>/SKILL.md` |
+| codex | A listing inside `AGENTS.md` |
+
+Generated files are gitignored. Edit the source files, then compile.

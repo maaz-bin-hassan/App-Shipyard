@@ -1,0 +1,24 @@
+---
+title: Writing a command
+description: Add a core file, a fragment, and a manifest entry. Then run the linter.
+---
+
+## Add the core file
+
+Create `commands/<name>/COMMAND.md`. The name is kebab-case. Frontmatter has `description` and `argument-hint`, and no other keys. Use `(none)` when the command takes no arguments.
+
+Then add these sections, in order, each with text: Goal, Ask, Verify, Never. Do not put Preconditions, Steps, or Rollback in the core file.
+
+## Add the fragment
+
+Create `platforms/<id>/fragments/<name>.md` with Preconditions, Steps, and Rollback. No frontmatter. Steps should name the files they edit. Ask every question in one batch before Steps.
+
+Add the name to that platform's `commands` array in `platform.json`.
+
+## Check it
+
+Run `npm run lint:commands`. It fails when a section is missing, empty, or out of order, or when a manifest lists a command with no fragment.
+
+Compile with `npm run compile -- --platform expo`. Generated `ship-*` files are build output. Edit the source, then compile again.
+
+Do not describe planned behavior as if it already ships. Say which platform the change actually covers.

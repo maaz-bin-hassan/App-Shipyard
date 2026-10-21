@@ -1,0 +1,36 @@
+---
+title: State file
+description: .shipkit/state.json records the platform, the answers, and how far each command got.
+---
+
+## Where it lives
+
+The file is `.shipkit/state.json`. The `.shipkit/` directory is gitignored. Do not commit it, and do not put secrets in it. Secrets belong in `.env`.
+
+A scaffolded Expo app starts like this:
+
+```json
+{
+  "platform": "expo",
+  "storeTargets": [],
+  "kitVersion": "0.0.0",
+  "answers": {},
+  "commands": {}
+}
+```
+
+## Fields
+
+| Field | Rule |
+| --- | --- |
+| platform | `expo`, `flutter`, `android`, `ios`, or null before selection. |
+| storeTargets | A subset of that platform's stores. |
+| kitVersion | The kit `package.json` version that last wrote the file. |
+| answers | Question id to the answer from Ask. No secrets. |
+| commands | Command name to status, timestamp, and step statuses. |
+
+A command status is `pending`, `in_progress`, `done`, `blocked`, or `skipped`. A step is `done` only after its result was checked. A new `kitVersion` means previous `done` steps run again.
+
+## How a run updates it
+
+Read the file. If it is missing, create it with null platform, empty stores, the kit version, empty answers, and empty commands. Skip a step already marked `done` for the current kit version. Write two-space JSON, and change only the command and steps this run touched.

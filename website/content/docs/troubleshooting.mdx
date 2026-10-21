@@ -1,0 +1,28 @@
+---
+title: Troubleshooting
+description: Failures the CLI and the command files already describe.
+---
+
+## The CLI is not on npm
+
+`createshipyard` runs from this checkout. If Node cannot find the kit, the error is that the package is not published and the command has to run from the repository.
+
+The directory name has to be a lowercase npm name, such as `my-app`. The CLI also refuses to scaffold inside the kit checkout.
+
+## iOS on Windows or Linux
+
+Choosing `ios` when `process.platform` is not `darwin` stops with: iOS native requires macOS and Xcode. Choose `expo`, `flutter`, or `android` on that machine.
+
+## Update plan needs state
+
+`node scripts/plan-update.mjs` reads `.shipkit/state.json`. If that file is missing, run `createshipyard` or `/ship-start` first. The script prints a plan. It does not edit files.
+
+## Stubs and the kit repo itself
+
+The Flutter, Android, and iOS templates say they are not buildable projects yet. `publish` blocks when the root package is not a working Expo app. The kit template is not a buildable app, so publish does not call EAS or open Play Console in this checkout.
+
+## Toolchain checks
+
+`env-check` reports pass, fail, or skipped. It does not install a toolchain unless you say yes after the failed checks are on screen. Xcode and CocoaPods are skipped off macOS when the install hint starts with `macOS only:`.
+
+`npm run lint:commands` prints each contract error and exits non-zero. A failed check is not marked done.

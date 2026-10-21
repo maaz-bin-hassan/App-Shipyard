@@ -1,0 +1,31 @@
+---
+title: Quick start
+description: Build the CLI from this repository and scaffold an app. The package is not on npm.
+---
+
+## Build the CLI
+
+From a checkout of this repository:
+
+```bash
+pnpm install
+pnpm cli:build
+node cli/dist/index.js my-app
+```
+
+That copies the Expo template, compiles slash commands, writes `AGENTS.md` and `.shipkit/state.json`, initializes git, and installs dependencies. Pass `--no-install` to skip the install.
+
+## Flags
+
+- `--agent` is `claude`, `cursor`, `opencode`, or `all`. The default is `claude`. `all` writes Claude Code, Cursor, and OpenCode.
+- `--platform` is `expo`, `flutter`, `android`, or `ios`. The default is `expo`. `ios` is refused when the machine is not macOS.
+- `--pm` is `npm`, `pnpm`, or `yarn`.
+- `--no-install` skips dependency installation.
+
+## Next command
+
+Open the new folder in the agent you selected and run `/ship-start`.
+
+## What is implemented
+
+The Expo template is the one the scaffold copies by default. The Flutter, Android, and iOS templates are stubs. They are not buildable projects yet. Antigravity and Codex are written by `scripts/compile-commands.mjs`, not by `--agent all`.

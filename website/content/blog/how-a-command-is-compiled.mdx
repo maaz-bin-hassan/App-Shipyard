@@ -1,0 +1,19 @@
+---
+title: How a slash command is compiled
+description: The core file, the platform fragment, and the five agent outputs. The kit is still 0.0.0.
+date: 2026-10-21
+---
+
+## There is no release yet
+
+`package.json` is `0.0.0`. The changelog has an Unreleased section and no version heading. This note is about the command format that is already in the repo.
+
+## One source, then a merge
+
+A command is two markdown files. The core file says what the command is for, which questions to ask, how to judge it, and what to refuse. The fragment says what must already be true on one platform, which steps to run, and how to undo them.
+
+`scripts/compile-commands.mjs` merges those files and writes `ship-<name>` for the agents you pass. The default list is Claude Code, Cursor, OpenCode, Antigravity, and Codex.
+
+## What the scaffold copies
+
+`createshipyard` copies one platform template. The default is Expo. The Flutter, Android, and iOS folders are stubs. The scaffold test covers the Expo copy, the compiled commands, and the state file.

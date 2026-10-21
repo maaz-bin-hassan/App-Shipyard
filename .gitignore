@@ -116,6 +116,10 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 
+# Website
+website/.next/
+website/out/
+
 # Generated distribution output
 dist/
 tmp/
