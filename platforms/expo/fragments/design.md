@@ -1,0 +1,17 @@
+## Preconditions
+
+- `.shipkit/state.json` exists and `platform` is `expo`.
+- `platforms/expo/template/src/theme/tokens.ts`, `platforms/expo/template/src/ui/components.ts`, `platforms/expo/template/src/data/source.ts`, and `platforms/expo/template/src/design/buildScreen.ts` exist.
+- Run every command from the repository root.
+
+## Steps
+
+1. Read `.shipkit/state.json` and `package.json`. If the state file is missing, create it with `platform` null, `storeTargets` [], `kitVersion` from `package.json` `version`, `answers` {}, and `commands` {}. Write two-space JSON. If `platform` is not `expo`, set `commands.design.status` to `blocked` and stop. If `commands.design.status` is `done` and `kitVersion` matches `package.json` `version`, report that design already finished and stop. Otherwise record step `1` as `done`.
+2. Set `commands.design` and step `2` to `in_progress` and write the current UTC timestamp. Write `answers.sourceKind`, `answers.sourcePaths`, and `answers.confirmedData`. Read each source before editing a screen. For `screenshots`, read the image files. For `stitch`, read the export's HTML, CSS, JSON, and images. For `figma`, look for a Figma MCP tool and read the frame with it. If that tool is not available, record step `2` as `blocked`, set `commands.design.status` to `blocked`, and stop. Ask for screenshots or a Stitch export on the next run. Do not draw the frame from the URL alone. Record step `2` as `done` when every source has been read.
+3. For each screen, write the layout in words first: regions, alignment, colours, type, and spacing. Map those onto `extendTokens` in `src/theme/tokens.ts`. Add a token when the design needs one. Set `color.primary` from `answers.primaryColor` when that answer exists. Add `src/screens/<name>.ts` that calls `buildScreen` with `Screen`, `Stack`, `Heading`, `Body`, and `Button` only. Pass `mockSource` unless `answers.confirmedData` names that screen as `remote` with non-empty evidence. Pass `remoteSource` only with that evidence. Pass navigation only when that answer lists the route. Copy `src/theme`, `src/ui/components.ts`, `src/data/source.ts`, and `src/design/buildScreen.ts` from `platforms/expo/template` into the app when those destinations are missing. If the checkout has no app source root, leave the modules in the template and still add any new screen modules under `platforms/expo/template/src/screens` only when a source was actually supplied. Record step `3` as `done` when each source has a screen module, and `blocked` when a screen still hard-codes a colour, type size, or space.
+4. Run `pnpm test:design`. Record step `4` as `blocked` when it fails, otherwise `done`.
+5. If the checkout has no `app.json` and no `app.config.js` or `app.config.ts` outside `platforms/expo/template`, this is still the kit repo. Record step `5` as `blocked`, set `commands.design.status` to `blocked`, and stop. The builder is in the template. The visual check waits for an Expo app. When an app exists, run it and ask the developer to compare each rebuilt screen with its source. Record step `5` as `done` only when they say every screen matches. Any mismatch stays `blocked`. Set `commands.design.status` to `done` only when step `5` is `done`. Write UTC timestamps.
+
+## Rollback
+
+Set `commands.design.status` to `blocked` and timestamp it. Leave theme tokens, screen modules, and `.shipkit/state.json` in place. Do not delete a screen the developer compared and accepted.

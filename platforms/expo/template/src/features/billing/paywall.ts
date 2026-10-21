@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { translate } from "../../i18n/translate.ts";
 import type { BillingClient, PackageLike } from "./types.ts";
 
 export type PaywallPackage = {
@@ -31,7 +32,7 @@ export async function loadPaywall(client: BillingClient): Promise<PaywallModel> 
       })),
     };
   } catch (error) {
-    const message = error instanceof Error && error.message.trim() !== "" ? error.message : "Could not load plans";
+    const message = error instanceof Error && error.message.trim() !== "" ? error.message : translate("billing.plansLoadFailed");
     return { status: "error", message };
   }
 }

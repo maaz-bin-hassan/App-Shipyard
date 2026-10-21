@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { ActivityIndicator, Pressable, Text, View } from "react-native";
+import { useI18n } from "../../i18n/useI18n.ts";
 import type { BillingClient } from "./types.ts";
 import { useEntitlement } from "./useEntitlement.ts";
 import { usePaywall, type PaywallPackage } from "./paywall.ts";
 
 export function PaywallScreen(props: { client: BillingClient; entitlementId: string }) {
+  const { t } = useI18n();
   const { model, reload } = usePaywall(props.client);
   const entitlement = useEntitlement(props.entitlementId, props.client);
   const [purchaseError, setPurchaseError] = useState<string | null>(null);
@@ -12,7 +14,7 @@ export function PaywallScreen(props: { client: BillingClient; entitlementId: str
   if (entitlement.active) {
     return (
       <View>
-        <Text>Premium is active on this account.</Text>
+        <Text>{t("billing.premiumActive")}</Text>
       </View>
     );
   }
@@ -21,7 +23,7 @@ export function PaywallScreen(props: { client: BillingClient; entitlementId: str
     return (
       <View>
         <ActivityIndicator />
-        <Text>Loading plans…</Text>
+        <Text>{t("billing.loadingPlans")}</Text>
       </View>
     );
   }
@@ -30,10 +32,10 @@ export function PaywallScreen(props: { client: BillingClient; entitlementId: str
     const message = model.status === "error" ? model.message : entitlement.errorMessage;
     return (
       <View>
-        <Text>Plans could not be loaded.</Text>
+        <Text>{t("billing.plansFailed")}</Text>
         {message ? <Text>{message}</Text> : null}
         <Pressable onPress={() => void reload()} accessibilityRole="button">
-          <Text>Try again</Text>
+          <Text>{t("billing.tryAgain")}</Text>
         </Pressable>
         <RestoreButton onPress={() => void entitlement.restore()} />
       </View>
@@ -43,7 +45,7 @@ export function PaywallScreen(props: { client: BillingClient; entitlementId: str
   if (model.status === "empty") {
     return (
       <View>
-        <Text>No plans are available right now.</Text>
+        <Text>{t("billing.noPlans")}</Text>
         <RestoreButton onPress={() => void entitlement.restore()} />
       </View>
     );
@@ -59,7 +61,7 @@ export function PaywallScreen(props: { client: BillingClient; entitlementId: str
             setPurchaseError(null);
             void props.client.purchasePackage(pkg.source).catch((error: unknown) => {
               if (isUserCancelled(error)) return;
-              const message = error instanceof Error ? error.message : "Purchase failed";
+              const message = error instanceof Error ? error.message : t("billing.purchaseFailed");
               setPurchaseError(message);
             });
           }}
@@ -72,7 +74,8 @@ export function PaywallScreen(props: { client: BillingClient; entitlementId: str
 }
 
 function PackageRow(props: { pkg: PaywallPackage; onPress: () => void }) {
-  const price = props.pkg.priceString.trim() === "" ? "Price unavailable" : props.pkg.priceString;
+  const { t } = useI18n();
+  const price = props.pkg.priceString.trim() === "" ? t("billing.priceUnavailable") : props.pkg.priceString;
   return (
     <Pressable onPress={props.onPress} accessibilityRole="button">
       <Text>{props.pkg.title}</Text>
@@ -82,9 +85,10 @@ function PackageRow(props: { pkg: PaywallPackage; onPress: () => void }) {
 }
 
 function RestoreButton(props: { onPress: () => void }) {
+  const { t } = useI18n();
   return (
     <Pressable onPress={props.onPress} accessibilityRole="button">
-      <Text>Restore purchases</Text>
+      <Text>{t("billing.restore")}</Text>
     </Pressable>
   );
 }

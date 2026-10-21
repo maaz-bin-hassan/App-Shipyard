@@ -1,0 +1,25 @@
+{
+  "name": "{{appName}}",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@sentry/react-native": "*",
+    "expo": "*",
+    "expo-application": "*",
+    "expo-audio": "*",
+    "expo-calendar": "*",
+    "expo-camera": "*",
+    "expo-contacts": "*",
+    "expo-device": "*",
+    "expo-file-system": "*",
+    "expo-image-picker": "*",
+    "expo-localization": "*",
+    "expo-location": "*",
+    "expo-notifications": "*",
+    "i18next": "*",
+    "posthog-react-native": "*",
+    "react": "*",
+    "react-native": "*",
+    "react-native-purchases": "*"
+  }
+}

@@ -17,7 +17,10 @@
     "test:billing": "node --experimental-strip-types --test platforms/expo/template/src/features/billing/useEntitlement.test.ts platforms/expo/template/src/features/billing/paywall.test.ts",
     "test:analytics": "node --experimental-strip-types --test platforms/expo/template/src/lib/analytics.test.ts",
     "test:ai": "node --experimental-strip-types --test platforms/expo/template/src/features/ai/aiClient.test.ts platforms/expo/template/src/features/ai/hooks.test.ts",
-    "test:permissions": "node --experimental-strip-types --test platforms/expo/template/src/features/permissions/usePermissionFlow.test.ts"
+    "test:permissions": "node --experimental-strip-types --test platforms/expo/template/src/features/permissions/usePermissionFlow.test.ts",
+    "test:design": "node --experimental-strip-types --test platforms/expo/template/src/design/buildScreen.test.ts",
+    "test:i18n": "node --experimental-strip-types --test platforms/expo/template/src/i18n/i18n.test.ts",
+    "test:legal": "node --experimental-strip-types --test platforms/expo/template/src/legal/draft.test.ts"
   },
   "devDependencies": {
     "@electric-sql/pglite": "^0.5.10",

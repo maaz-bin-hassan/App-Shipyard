@@ -1,6 +1,10 @@
-export const CONSENT_COPY = {
-  title: "Analytics and crash reports",
-  body: "When this is on, the app sends product events to PostHog and crash reports to Sentry. When it is off, neither receives anything.",
-  on: "On",
-  off: "Off",
-} as const;
+import { translate } from "../../i18n/translate.ts";
+
+export function consentCopy(language?: string) {
+  return {
+    title: translate("settings.consent.title", language),
+    body: translate("settings.consent.body", language),
+    on: translate("settings.consent.on", language),
+    off: translate("settings.consent.off", language),
+  };
+}

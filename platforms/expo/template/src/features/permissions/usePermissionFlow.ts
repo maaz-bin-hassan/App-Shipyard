@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
+import { useI18n } from "../../i18n/useI18n.ts";
+import { translate } from "../../i18n/translate.ts";
 import type { EventName } from "../../lib/events.ts";
 import { permissionCopy } from "./i18n.ts";
 import type {
@@ -37,7 +39,9 @@ export function usePermissionFlow(
   const [status, setStatus] = useState<PermissionStatus | "loading">("loading");
   const [phase, setPhase] = useState<PermissionPhase>("loading");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const copy = permissionCopy(kind, options?.locale ?? "en");
+  const i18n = useI18n();
+  const locale = options?.locale ?? i18n.language;
+  const copy = permissionCopy(kind, locale);
 
   useEffect(() => {
     let cancelled = false;
@@ -53,13 +57,13 @@ export function usePermissionFlow(
       (error: unknown) => {
         if (cancelled) return;
         setPhase("error");
-        setErrorMessage(error instanceof Error && error.message.trim() !== "" ? error.message : "Could not check this permission.");
+        setErrorMessage(error instanceof Error && error.message.trim() !== "" ? error.message : translate("errors.permissionCheck", locale));
       },
     );
     return () => {
       cancelled = true;
     };
-  }, [client, kind]);
+  }, [client, kind, locale]);
 
   const openSettings = useCallback(async () => {
     await client.openSettings();

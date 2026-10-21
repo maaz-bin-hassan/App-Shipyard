@@ -4,7 +4,7 @@
   "language": "Kotlin",
   "storeTargets": ["play"],
   "templateDir": "platforms/android/template",
-  "commands": ["start", "env-check", "plan-pricing", "paywall", "analytics", "ai"],
+  "commands": ["start", "env-check", "plan-pricing", "paywall", "analytics", "ai", "design", "translate", "legal"],
   "envChecks": [
     {
       "command": "java -version",

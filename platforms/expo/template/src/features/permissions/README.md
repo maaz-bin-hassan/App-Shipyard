@@ -1,6 +1,6 @@
 # Permission screens
 
-Eight pre-permission screens live in this folder. Each one explains the benefit in copy from `i18n.ts`, then offers **Allow** and **Not now**. If the operating system will not ask again, the screen explains that and opens system settings.
+Eight pre-permission screens live in this folder. Each one explains the benefit in copy from `src/i18n/locales/en.json`, then offers **Allow** and **Not now**. If the operating system will not ask again, the screen explains that and opens system settings.
 
 There is no slash command. Copy this folder into the app when you are ready to ask for a permission, and pass a `PermissionClient`.
 
@@ -19,7 +19,7 @@ There is no slash command. Copy this folder into the app when you are ready to a
 
 `PermissionScreen` takes a `kind` if you would rather use one component. `usePermissionFlow(kind, client)` is the hook those screens use. `phase` is `prompt`, `granted`, `deferred`, `settings`, `loading`, or `error`. `granted` and `deferred` render nothing so the caller can show the feature or move on.
 
-Copy is English. `permissionCopy(kind, locale)` falls back to English for any other language. Add a catalog in `i18n.ts` before shipping another language. The screen reads `title`, `body`, `allow`, `notNow`, and the denied-forever strings from that function. Do not hard-code those sentences in the component.
+Copy lives in `src/i18n/locales/en.json`. `permissionCopy(kind, locale)` reads that catalog and falls back to English. Add a locale JSON file before shipping another language. The screen reads `title`, `body`, `allow`, `notNow`, and the denied-forever strings from that function. Do not hard-code those sentences in the component.
 
 ## Hook
 

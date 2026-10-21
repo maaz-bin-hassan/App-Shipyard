@@ -36,6 +36,12 @@ What is implemented is the command contract and the compiler:
 
 Pre-permission screens for camera, photos, notifications, location, microphone, contacts, calendar, and Bluetooth are in `platforms/expo/template/src/features/permissions`. `pnpm test:permissions` covers the hook. There is no slash command for them.
 
+`design` rebuilds screens from screenshots, a Figma frame, or a Stitch export. Screens use `src/theme` tokens and the components in `src/ui`. Real data is wired only when the developer names it. Otherwise the screen reads a typed mock through `DataSource`. `pnpm test:design` covers that builder.
+
+`translate` keeps user-facing copy in `src/i18n/locales`. The agent writes the other languages. It does not call a translation API. Urdu and Arabic use right-to-left layout. `pnpm test:i18n` covers the catalog, the language switch, and those two layouts.
+
+`legal` writes `docs/legal/privacy-policy.md` and `docs/legal/data-safety-answers.md` from the Expo app config, the template dependencies, `docs/events.md`, and the Supabase schema. The policy says it was generated from code and is not legal advice. A rerun lists what changed. `pnpm test:legal` checks that every template dependency is named.
+
 ## Shared backend
 
 Every platform will call one Supabase backend. The schema, the daily AI limit, and the OpenRouter proxy are in `backend/supabase/`. [docs/backend.md](docs/backend.md) has the setup commands and the HTTP contract.

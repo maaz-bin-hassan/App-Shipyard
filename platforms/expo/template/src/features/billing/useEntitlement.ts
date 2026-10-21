@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { translate } from "../../i18n/translate.ts";
 import type { BillingClient, CustomerInfoLike, EntitlementState, EntitlementStatus } from "./types.ts";
 
 export function isEntitled(info: CustomerInfoLike | null, entitlementId: string): boolean {
@@ -38,7 +39,7 @@ export function useEntitlement(entitlementId: string, client: BillingClient): En
     try {
       apply(await client.getCustomerInfo());
     } catch (error) {
-      fail(error, "Could not load purchases");
+      fail(error, translate("billing.loadFailed"));
     }
   }, [apply, client, fail]);
 
@@ -48,7 +49,7 @@ export function useEntitlement(entitlementId: string, client: BillingClient): En
     try {
       apply(await client.restorePurchases());
     } catch (error) {
-      fail(error, "Could not restore purchases");
+      fail(error, translate("billing.restoreFailed"));
     }
   }, [apply, client, fail]);
 
@@ -61,7 +62,7 @@ export function useEntitlement(entitlementId: string, client: BillingClient): En
         if (!cancelled) apply(info);
       },
       (error: unknown) => {
-        if (!cancelled) fail(error, "Could not load purchases");
+        if (!cancelled) fail(error, translate("billing.loadFailed"));
       },
     );
     const unsubscribe = client.addCustomerInfoUpdateListener?.((info) => {

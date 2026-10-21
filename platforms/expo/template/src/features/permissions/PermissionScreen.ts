@@ -1,4 +1,5 @@
 import { createElement, type ReactNode } from "react";
+import { translate } from "../../i18n/translate.ts";
 import { Pressable, Text, View } from "../../ui/host.ts";
 import type { PermissionClient, PermissionKind } from "./types.ts";
 import { usePermissionFlow, type PermissionTracker } from "./usePermissionFlow.ts";
@@ -9,8 +10,9 @@ export function PermissionScreen(props: {
   locale?: string;
   analytics?: PermissionTracker;
 }): ReactNode {
+  const locale = props.locale;
   const flow = usePermissionFlow(props.kind, props.client, {
-    locale: props.locale,
+    locale,
     analytics: props.analytics,
   });
 
@@ -21,7 +23,11 @@ export function PermissionScreen(props: {
   if (flow.phase === "granted" || flow.phase === "deferred") return null;
 
   if (flow.phase === "error") {
-    return createElement(View, null, createElement(Text, null, flow.errorMessage ?? "Could not check this permission."));
+    return createElement(
+      View,
+      null,
+      createElement(Text, null, flow.errorMessage ?? translate("errors.permissionCheck", locale)),
+    );
   }
 
   if (flow.phase === "settings") {
