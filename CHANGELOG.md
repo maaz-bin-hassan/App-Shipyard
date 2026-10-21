@@ -9,6 +9,7 @@ This project has no release yet. Future releases are intended to follow [Semanti
 
 ### Added
 
+- `publish` command and Play Console notes in `docs/play-console-checklist.md`. Internal testing waits for an explicit yes at each console step. Listing text, icons, and screenshots are checked against the current Play asset rules.
 - `design`, `translate`, and `legal` commands. Expo theme tokens and screen components, locale JSON with Urdu and Arabic RTL checks, and a privacy draft plus Play Data safety answers generated from the template's dependencies, permissions, events, and Supabase schema.
 - `analytics` and `ai` commands. Expo template wrappers for PostHog and Sentry, a consent flag, the event list in `docs/events.md`, streaming and one-shot AI hooks, and eight pre-permission screens.
 - `plan-pricing` and `paywall` commands, Play Console billing notes in `docs/billing-setup.md`, and an Expo RevenueCat paywall module with entitlement tests.

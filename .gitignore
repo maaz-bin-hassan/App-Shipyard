@@ -29,6 +29,9 @@ backend/supabase/.branches/
 *.provisionprofile
 credentials.json
 service-account.json
+key.properties
+play-store-credentials.json
+pc-api-*.json
 google-services.json
 GoogleService-Info.plist
 !google-services.json.example

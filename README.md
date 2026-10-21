@@ -42,6 +42,8 @@ Pre-permission screens for camera, photos, notifications, location, microphone, 
 
 `legal` writes `docs/legal/privacy-policy.md` and `docs/legal/data-safety-answers.md` from the Expo app config, the template dependencies, `docs/events.md`, and the Supabase schema. The policy says it was generated from code and is not legal advice. A rerun lists what changed. `pnpm test:legal` checks that every template dependency is named.
 
+`publish` walks a working app to a Google Play internal test. Listing copy goes in `fastlane/metadata/android`. Every Play Console action waits for an explicit yes. Asset sizes and click paths are in [docs/play-console-checklist.md](docs/play-console-checklist.md). The command stops at internal testing.
+
 ## Shared backend
 
 Every platform will call one Supabase backend. The schema, the daily AI limit, and the OpenRouter proxy are in `backend/supabase/`. [docs/backend.md](docs/backend.md) has the setup commands and the HTTP contract.

@@ -4,7 +4,7 @@
   "language": "Dart",
   "storeTargets": ["play", "appstore"],
   "templateDir": "platforms/flutter/template",
-  "commands": ["start", "env-check", "plan-pricing", "paywall", "analytics", "ai", "design", "translate", "legal"],
+  "commands": ["start", "env-check", "plan-pricing", "paywall", "analytics", "ai", "design", "translate", "legal", "publish"],
   "envChecks": [
     {
       "command": "flutter --version",
