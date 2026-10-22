@@ -6,3 +6,9 @@ The paywall module is in `src/features/billing` ([README](src/features/billing/R
 
 - Application id: {{applicationId}}
 - Primary colour: {{primaryColor}}
+
+## What you add
+
+Replace `assets/icon.png` with your logo. Copy `.env.example` to `.env` and fill the public keys. Secret keys stay out of the app: the OpenRouter key belongs in the Supabase project, and `SENTRY_AUTH_TOKEN` belongs in the build environment.
+
+The paywall, the pricing note in `docs/monetization.md`, the Supabase backend, the home screen, the English catalog, and the legal drafts are already in this project. Store prices are loaded at runtime. The privacy draft in `docs/legal/privacy-policy.md` is not legal advice.

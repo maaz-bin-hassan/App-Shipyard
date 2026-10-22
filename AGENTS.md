@@ -47,7 +47,7 @@ These agents have no project-level custom slash-command directory. Follow the me
 
 ---
 name: ship-start
-description: Choose the platform, save the app identity, compile that platform's commands, and check the toolchain.
+description: Confirm the publishable app createshipyard wrote, or save the identity and copy the template when that app is not there yet.
 argument-hint: "(none)"
 ---
 
@@ -59,7 +59,9 @@ argument-hint: "(none)"
 
 ## Goal
 
-Ask which platform this project ships, save the app identity and store targets, compile only that platform's commands, copy its template and the shared backend, then run env-check and leave auth as the next command.
+`createshipyard` writes the publishable Expo app before any slash command runs. That app already contains the RevenueCat paywall, the pricing note, the Supabase backend, the design shell, the English catalog, analytics with consent off, and the legal drafts. When `.shipkit/state.json` says start is `done`, report that the remaining inputs are the logo and `.env`, then stop. Do not ask for another slash command.
+
+When start is not done, ask which platform this project ships, save the app identity and store targets, compile only that platform's commands, copy its template and the shared backend, then run env-check. Flutter, Android, and iOS templates are still stubs. The publishable files are the Expo app.
 
 ## Preconditions
 
@@ -98,17 +100,19 @@ A blank required answer stays in this batch until it is filled. Do not start Ste
 
 ## Steps
 
-1. Read `.shipkit/state.json`. If it is missing, create it with `platform` null, `storeTargets` [], `kitVersion` copied from `package.json` `version`, `answers` {}, and `commands` {}. Write two-space JSON. If `commands.start.status` is `done` and `kitVersion` matches `package.json` `version`, report that start already finished and stop. If step `1` is already `done` for that `kitVersion`, leave it and continue. Otherwise record step `1` as `done`.
+1. Read `.shipkit/state.json`. If it is missing, create it with `platform` null, `storeTargets` [], `kitVersion` copied from `package.json` `version`, `answers` {}, and `commands` {}. Write two-space JSON. If `commands.start.status` is `done` and `kitVersion` matches `package.json` `version`, report that the publishable template is already written, that the remaining inputs are the logo and `.env`, and stop. Do not ask for another slash command. If step `1` is already `done` for that `kitVersion`, leave it and continue. Otherwise record step `1` as `done`.
 2. Skip when step `2` is `done` or `skipped` and `kitVersion` matches. Let `<id>` be the platform from Ask, or the saved `platform` when that question was skipped. If `<id>` is not `flutter`, do not write `flutter`. Run `npm run compile -- --platform <id>` and follow `platforms/<id>/fragments/start.md` from step 2 with the answers already collected. Stop this fragment. If `<id>` is `flutter`, record step `2` as `skipped`.
 3. Skip when step `3` is `done` and `kitVersion` matches. Write `platform` `flutter`, `storeTargets` from the answers, and `answers` for `appName`, `applicationId`, `primaryColor`, `languages`, and `storeTargets`. Set `kitVersion` from `package.json`. Set `commands.start.status` to `in_progress`, record step `3` as `done`, and write UTC timestamps. Keep `storeTargets` inside `play` and `appstore`.
 4. Skip when step `4` is `done` or `skipped` and `kitVersion` matches. If `platforms/flutter/platform.json` exists, run `npm run compile -- --platform flutter`. Confirm the generated `ship-*` files and `ship-*` skill directories are `ship-start`, `ship-env-check`, `ship-plan-pricing`, `ship-paywall`, `ship-analytics`, `ship-ai`, `ship-design`, `ship-translate`, `ship-legal`, `ship-publish`, and `ship-update`, and nothing else. Record step `4` as `done` when those names are the only generated commands. If the compiler fails or an extra `ship-*` command remains, record step `4` as `blocked` and stop. If `platforms/flutter/platform.json` is missing and `docs/kit/platform.json` exists, `createshipyard` already compiled those commands. Confirm the same names are present, record step `4` as `skipped`, and continue. If neither manifest exists, record step `4` as `blocked` and stop.
 5. Skip when step `5` is `done` or `skipped` and `kitVersion` matches. If `platforms/flutter/template` exists, copy each file under it to the same relative path at the project root when that destination is missing. Leave an existing file as it is. In each file this step copied, replace `{{appName}}`, `{{applicationId}}`, and `{{primaryColor}}`. Copy `backend/` to the project root only when `backend/` is missing. If `platforms/flutter/template` is missing, leave the files `createshipyard` already wrote. Search the files this step copied, or `README.md` when it copied none. Record step `5` as `blocked` when `{{appName}}`, `{{applicationId}}`, or `{{primaryColor}}` remains. Otherwise record step `5` as `done`.
 6. Skip when step `6` is `done` and `kitVersion` matches. Run env-check for flutter and write its state before continuing. Record step `6` as `done` when `commands.env-check.status` is `done`, and `blocked` when env-check is `blocked`.
-7. Skip when step `7` is `done` and `kitVersion` matches. When step `6` is `done`, set `commands.auth` to `pending` with an empty `steps` object and the current UTC timestamp, set `commands.start.status` to `done`, and say that auth is next and has no command yet. When step `6` is `blocked`, set `commands.start.status` to `blocked` and leave `commands.auth` unset.
+7. Skip when step `7` is `done` and `kitVersion` matches. When step `6` is `done`, set `commands.start.status` to `done` with the current UTC timestamp. When `docs/monetization.md` and `src/features/billing` exist, say the remaining inputs are the logo and `.env` and do not ask for another slash command. When they do not exist, say this platform template is still a stub and the publishable app is created with `createshipyard --platform expo`. Do not set `commands.auth`. When step `6` is `blocked`, set `commands.start.status` to `blocked`.
 
 ## Verify
 
-`.shipkit/state.json` has the chosen `platform`, a `storeTargets` list inside that platform's manifest, and `answers` for `appName`, `applicationId`, `primaryColor`, and `languages`. Generated `ship-*` commands match that platform's `commands` and no other platform's generated commands remain. Template files that were copied have the three placeholders replaced. `commands.env-check` has a status. `commands.auth` is `pending` only after env-check is `done`. The state file and the transcript contain no secrets.
+When `createshipyard` already finished, `commands.start.status` is `done`, `docs/monetization.md` exists, the paywall names an entitlement, `backend/` exists, and the reply tells the developer to add a logo and `.env`. It does not ask for another slash command.
+
+When this command is doing the copy itself, `.shipkit/state.json` has the chosen `platform`, a `storeTargets` list inside that platform's manifest, and `answers` for `appName`, `applicationId`, `primaryColor`, and `languages`. Generated `ship-*` commands match that platform's `commands` and no other platform's generated commands remain. Template files that were copied have the three placeholders replaced. `commands.env-check` has a status. The state file and the transcript contain no secrets.
 
 ## Rollback
 
@@ -116,7 +120,7 @@ Set `commands.start.status` to `blocked` and timestamp it. Leave copied template
 
 ## Never
 
-Do not ask the platform question when `platform` is already set, except to leave an `ios` value that cannot be built on this machine. Do not save `ios` unless `node -p process.platform` prints `darwin`. Do not offer a store the manifest omits. Do not install, upgrade, or remove a toolchain unless the developer explicitly agrees after a failed env-check. Do not create accounts, spend money, upload a binary, or submit to a store. Do not print `.env` or secret files. Do not run auth. Do not mark start `done` while env-check is `blocked` or `pending`.
+Do not ask the platform question when `platform` is already set, except to leave an `ios` value that cannot be built on this machine. Do not save `ios` unless `node -p process.platform` prints `darwin`. Do not offer a store the manifest omits. Do not install, upgrade, or remove a toolchain unless the developer explicitly agrees after a failed env-check. Do not create accounts, spend money, upload a binary, or submit to a store. Do not print `.env` or secret files. Do not run auth. Do not mark start `done` while env-check is `blocked` or `pending`, unless `createshipyard` already wrote the publishable Expo app and set start to `done`. Do not ask the developer to run paywall, plan-pricing, analytics, design, translate, legal, or publish when those files are already in the project.
 
 ### ship-env-check
 

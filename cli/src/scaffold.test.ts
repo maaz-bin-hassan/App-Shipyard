@@ -18,7 +18,7 @@ describe("createshipyard scaffold", () => {
     try {
       const result = await run(process.execPath, [cli, dest, "--agent", "all", "--no-install", "--platform", "expo"]);
       assert.equal(result.code, 0, `${result.stderr}\n${result.stdout}`);
-      assert.match(result.stdout, /Open this folder in Claude Code, Cursor, or OpenCode and run \/ship-start/);
+      assert.match(result.stdout, /Replace assets\/icon.png with your logo/);
       assert.match(result.stdout, /Dependencies were not installed \(--no-install\)/);
 
       const kitPackage = JSON.parse(await readFile(path.join(kitRoot, "package.json"), "utf8")) as { version: string };
@@ -26,8 +26,17 @@ describe("createshipyard scaffold", () => {
       assert.equal(state.platform, "expo");
       assert.equal(state.kitVersion, kitPackage.version);
       assert.equal(kitPackage.version, "1.1.0");
-      assert.deepEqual(state.storeTargets, []);
-      assert.deepEqual(state.answers, {});
+      assert.deepEqual(state.storeTargets, ["play", "appstore"]);
+      assert.equal(state.answers.appName, "my-app");
+      assert.equal(state.answers.applicationId, "com.example.myapp");
+      assert.equal(state.answers.monetizationModel, "freemium");
+      assert.equal(state.answers.entitlementId, "premium");
+      assert.deepEqual(state.answers.productIds, ["premium_monthly", "premium_annual"]);
+      assert.equal(state.commands.start.status, "done");
+      assert.equal(state.commands["plan-pricing"].status, "done");
+      assert.equal(state.commands.paywall.status, "done");
+      assert.equal(state.commands.legal.status, "done");
+      assert.equal(state.commands.publish.status, "skipped");
 
       const readme = await readFile(path.join(dest, "README.md"), "utf8");
       assert.equal(readme.includes("{{appName}}"), false);
@@ -42,7 +51,24 @@ describe("createshipyard scaffold", () => {
       assert.equal("type" in pkg, false);
 
       const agents = await readFile(path.join(dest, "AGENTS.md"), "utf8");
-      assert.match(agents, /\/ship-start/);
+      assert.match(agents, /Replace assets\/icon.png/);
+      const billing = await readFile(path.join(dest, "src", "features", "billing", "billingConfig.ts"), "utf8");
+      assert.match(billing, /entitlementId = "premium"/);
+      const host = await readFile(path.join(dest, "src", "ui", "host.ts"), "utf8");
+      assert.match(host, /react-native/);
+      const monetization = await readFile(path.join(dest, "docs", "monetization.md"), "utf8");
+      assert.match(monetization, /## Recommended model/);
+      assert.match(monetization, /## Entitlement/);
+      const privacy = await readFile(path.join(dest, "docs", "legal", "privacy-policy.md"), "utf8");
+      assert.match(privacy, /not legal advice/);
+      await readFile(path.join(dest, "docs", "legal", "data-safety-answers.md"), "utf8");
+      await readFile(path.join(dest, "docs", "store", "listing-en.md"), "utf8");
+      await readFile(path.join(dest, "docs", "i18n", "review-en.md"), "utf8");
+      await readFile(path.join(dest, "assets", "icon.png"));
+      await readFile(path.join(dest, "backend", "supabase", "functions", "ai-proxy", "handler.ts"), "utf8");
+      const identity = await readFile(path.join(dest, "src", "app", "identity.ts"), "utf8");
+      assert.equal(identity.includes("{{appName}}"), false);
+      assert.match(identity, /my-app/);
       const command = await readFile(path.join(dest, ".claude", "commands", "ship-start.md"), "utf8");
       assert.match(command, /platform: expo/);
       await readFile(path.join(dest, ".cursor", "commands", "ship-update.md"), "utf8");

@@ -7,7 +7,9 @@ This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-Nothing since 1.1.0.
+### Changed
+
+- `createshipyard --platform expo` writes a publishable app in that one command. The paywall, pricing note, Supabase backend, design shell, English catalog, and legal drafts are files in the new project. The remaining inputs are the logo and `.env`. The default platform stays Flutter.
 
 ## [1.1.0] - 2026-10-22
 

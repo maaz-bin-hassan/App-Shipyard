@@ -26,11 +26,11 @@ export function applicationIdFor(directoryName: string): string {
   return `com.example.${directoryName.replace(/-/g, "")}`;
 }
 
-export function nextStepSentence(agent: AgentFlag): string {
-  if (agent === "cursor") return "Open this folder in Cursor and run /ship-start";
-  if (agent === "opencode") return "Open this folder in OpenCode and run /ship-start";
-  if (agent === "all") return "Open this folder in Claude Code, Cursor, or OpenCode and run /ship-start";
-  return "Open this folder in Claude Code and run /ship-start";
+export function nextStepSentence(platform: PlatformId): string {
+  if (platform === "expo") {
+    return "Replace assets/icon.png with your logo, copy .env.example to .env, and fill in the public keys. The paywall, pricing, backend, design, and English translations are already in this project";
+  }
+  return "This platform template is still a stub. Create the publishable app with --platform expo";
 }
 
 export function platformHostError(platform: PlatformId, host: NodeJS.Platform): string | null {

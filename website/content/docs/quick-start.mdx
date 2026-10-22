@@ -17,16 +17,16 @@ The later Expo toolchain check is stricter than the installer. It accepts Node.j
 npx createshipyard my-app
 ```
 
-npm downloads `createshipyard` and runs it. The current release is 1.1.0. The command copies the Flutter template, compiles `/ship-*` commands for Claude Code, and writes `AGENTS.md` and `.shipkit/state.json`. It initializes git on branch `main` and makes an initial commit when `user.name` and `user.email` are set. It then runs `npm install` inside `my-app`. Pass `--platform expo` for the Expo template.
+npm downloads `createshipyard` and runs it. The current release is 1.1.0. The command copies the Flutter template, compiles `/ship-*` commands for Claude Code, and writes `AGENTS.md` and `.shipkit/state.json`. It initializes git on branch `main` and makes an initial commit when `user.name` and `user.email` are set. It then runs `npm install` inside `my-app`. Pass `--platform expo` for the publishable app, with the paywall, pricing note, Supabase backend, design shell, English catalog, and legal drafts.
 
-The last lines are:
+The last lines for the default Flutter template are:
 
 ```text
 Created my-app
 
 Next steps:
   cd my-app
-  Open this folder in Claude Code and run /ship-start
+  This platform template is still a stub. Create the publishable app with --platform expo
 ```
 
 ## Flags

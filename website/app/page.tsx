@@ -20,7 +20,7 @@ const services = [
     id: "expo" as const,
     name: "Expo",
     setup: "createshipyard copies this template when you pass --platform expo, writes the app config, and installs dependencies.",
-    easy: "The default platform is Flutter. Pass --platform expo for this template. The Flutter, Android, and iOS templates are still stubs.",
+    easy: "Pass --platform expo. createshipyard writes the app, the paywall, and the backend. The default platform is Flutter, and that template is still a stub.",
   },
   {
     id: "supabase" as const,
@@ -32,7 +32,7 @@ const services = [
     id: "revenuecat" as const,
     name: "RevenueCat",
     setup: "The paywall loads the current offering and shows each package's store price. Restore purchases is a button. It does not run on launch.",
-    easy: "/ship-paywall gates the premium features from your pricing note. Live products in Play Console or App Store Connect wait until you answer yes.",
+    easy: "The new app already gates Premium tools and loads store prices. Live products in Play Console or App Store Connect wait until you create them.",
   },
   {
     id: "posthog" as const,
@@ -63,18 +63,18 @@ const handoff = [
   },
   {
     number: "02",
-    title: "Open that folder in the agent",
-    text: "cd my-app, then open it in the agent you named. The slash commands are already files in the project. You do not paste a prompt in.",
+    title: "Open the new folder",
+    text: "cd my-app. The default template is Flutter, and it is still a stub. Pass --platform expo for the paywall, pricing note, backend, design shell, and English catalog.",
   },
   {
     number: "03",
-    title: "Run /ship-start",
-    text: "The agent asks for the app name, package id, colour, languages, and stores, once. It saves the answers in .shipkit/state.json and checks the toolchain.",
+    title: "Add a logo and .env",
+    text: "On the Expo app, replace assets/icon.png. Copy .env.example to .env and fill the public keys. Secret keys stay out of the app.",
   },
   {
     number: "04",
-    title: "Hand it the next command",
-    text: "Run /ship-plan-pricing, /ship-paywall, /ship-analytics, or /ship-ai when you are ready. The agent reads that command and edits the files it names. Anything that spends money or publishes waits for an explicit yes.",
+    title: "Run the Expo app",
+    text: "Home is free. Premium stays locked until a store purchase. Plan prices load from the store. Analytics stays off until the settings switch is on.",
   },
 ];
 
@@ -90,9 +90,9 @@ export default function HomePage() {
           {pitch}
         </h1>
         <p className="mt-6 max-w-[68ch] text-[18px] text-muted">
-          App Shipyard is a starter kit for one mobile app. It copies a Flutter project by default, writes the same slash commands
-          for Claude Code, Cursor, or OpenCode, and leaves Supabase, RevenueCat, PostHog, and Sentry ready to finish
-          with your coding agent. Pass --platform expo for the Expo template. The npm package is createshipyard.
+          App Shipyard scaffolds a Flutter app by default. Pass --platform expo and the same command writes the paywall,
+          the pricing note, the Supabase backend, the home screen, and the English catalog. You add a logo and the public keys in .env.
+          The npm package is createshipyard.
         </p>
         <div className="mt-8 max-w-[640px]">
           <CodeBlock code={installCommand} language="bash" label="Install" copyLabel="Copy" copyVariant="primary" />
@@ -106,8 +106,8 @@ export default function HomePage() {
       <section className="pb-14 md:pb-[88px]">
         <h2 className="mb-4 text-[24px] font-semibold">What it sets up</h2>
         <p className="mb-8 max-w-[68ch] text-muted">
-          The code for each service is already in the Expo template. You add accounts and secrets. The agent follows
-          the matching /ship-* command and stops before a live store or a paid plan.
+          The code for each service is already in the app createshipyard writes. You add accounts and secrets.
+          Nothing in that command creates a live store product or a paid plan.
         </p>
         <dl className="border-t border-border">
           {services.map((item) => (
@@ -228,7 +228,7 @@ export default function HomePage() {
             <summary>Which agents work?</summary>
             <p>
               npx createshipyard my-app --agent accepts claude, cursor, opencode, or all. The default is claude.
-              all writes Claude Code, Cursor, and OpenCode. Open the new folder and run /ship-start.
+              all writes Claude Code, Cursor, and OpenCode. The default platform is Flutter. Pass --platform expo for the publishable app, then add a logo and .env.
             </p>
           </details>
           <details>

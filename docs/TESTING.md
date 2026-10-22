@@ -114,7 +114,7 @@ Expected:
 - One `cursor: .cursor/commands/ship-<name>.md` line for each of `start`, `env-check`, `plan-pricing`, `paywall`, `analytics`, `ai`, `design`, `translate`, `legal`, `publish`, and `update`. On Windows the slashes may be backslashes.
 - A line `Created` followed by the directory.
 - `Dependencies were not installed (--no-install).`
-- `Open this folder in Cursor and run /ship-start`.
+- `Replace assets/icon.png with your logo`.
 - Git may print CRLF warnings on Windows. Those warnings do not fail the step.
 
 Then confirm the app files:
@@ -160,28 +160,18 @@ In the agent, open the scaffolded app and ask it to run `/ship-env-check`. Expec
 
 ## 8. Start
 
-In the scaffolded app, run `/ship-start`. `createshipyard` already set `platform` to `expo`, so the agent must not ask you to pick a platform again.
+`createshipyard --platform expo` already wrote the app. Confirm these files in the scaffolded directory:
 
-Answer this batch once:
+- `docs/monetization.md` has Recommended model, Feature gating, Price points, Regional pricing, and Entitlement.
+- `src/features/billing/billingConfig.ts` sets `entitlementId` to `premium`.
+- `docs/legal/privacy-policy.md` says it is not legal advice.
+- `backend/supabase/functions/ai-proxy/handler.ts` exists.
+- `assets/icon.png` exists.
+- `.shipkit/state.json` has `commands.start.status` `done` and `answers.monetizationModel` `freemium`.
 
-| Id | Example |
-| --- | --- |
-| `appName` | `Shipyard Fresh` |
-| `applicationId` | `com.example.shipyardfresh` |
-| `primaryColor` | `#6750A4` |
-| `languages` | `en` |
-| `storeTargets` | `play` |
+Running `/ship-start` should report that the template is already written and that the remaining inputs are the logo and `.env`. It should not ask for another slash command.
 
-Expected when env-check is `done`:
-
-- `commands.start.status` is `done`.
-- `commands.auth.status` is `pending`.
-- `storeTargets` is `["play"]`.
-- The reply says auth is next and has no command yet.
-
-Expected when env-check is `blocked`: `commands.start.status` is `blocked` and `commands.auth` is absent. That is the correct stop. Do not mark start done.
-
-Running `/ship-start` a second time with the same `kitVersion` and a `done` status should report that start already finished and should not ask again.
+The placeholder icon and the blank public keys in `.env` are the inputs you add. Store listing upload stays manual.
 
 ## 9. Plan pricing
 

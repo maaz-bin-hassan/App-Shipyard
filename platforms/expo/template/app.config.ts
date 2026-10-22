@@ -3,7 +3,11 @@ const config = {
   slug: "{{appName}}",
   version: "1.0.0",
   orientation: "portrait",
+  icon: "./assets/icon.png",
   userInterfaceStyle: "automatic",
+  splash: {
+    backgroundColor: "{{primaryColor}}",
+  },
   ios: {
     bundleIdentifier: "{{applicationId}}",
     supportsTablet: true,
@@ -20,6 +24,10 @@ const config = {
   },
   android: {
     package: "{{applicationId}}",
+    adaptiveIcon: {
+      foregroundImage: "./assets/icon.png",
+      backgroundColor: "{{primaryColor}}",
+    },
     permissions: [
       "android.permission.CAMERA",
       "android.permission.READ_MEDIA_IMAGES",

@@ -77,6 +77,28 @@ export const en = {
     "restoreFailed": "Could not restore purchases",
     "plansLoadFailed": "Could not load plans"
   },
+  "shell": {
+    "home": {
+      "body": "The home screen is free. Premium tools unlock after a store purchase.",
+      "backend": "AI calls go through the Supabase proxy. The provider key stays on the server."
+    },
+    "nav": {
+      "home": "Home",
+      "premium": "Premium",
+      "plans": "Plans",
+      "settings": "Settings"
+    },
+    "premium": {
+      "needsKey": "Add the RevenueCat public SDK keys in .env to load plans."
+    },
+    "plans": {
+      "needsKey": "Add the RevenueCat public SDK keys in .env. Plan prices come from the store."
+    },
+    "setup": {
+      "title": "Still to fill in",
+      "body": "Copy .env.example to .env and set the blank public keys. Replace assets/icon.png with your logo."
+    }
+  },
   "errors": {
     "permissionCheck": "Could not check this permission."
   }

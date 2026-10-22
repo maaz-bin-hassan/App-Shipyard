@@ -25,7 +25,7 @@ export async function runScaffold(options: CliOptions): Promise<void> {
   await ensureDestination(dest);
 
   const appName = path.basename(dest);
-  const nextStep = nextStepSentence(options.agent);
+  const nextStep = nextStepSentence(options.platform);
   const syncScript = path.join(kitRoot, "scripts", "sync-project.mjs");
   await runChecked(process.execPath, [
     syncScript,

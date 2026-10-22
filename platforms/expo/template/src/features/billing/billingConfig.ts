@@ -1,7 +1,7 @@
 /**
- * The paywall command rewrites this file from `.shipkit/state.json` answers.
- * An empty entitlement id keeps every gate locked.
+ * createshipyard writes these defaults into the new app.
+ * Prices stay on the store offering. This file only names the entitlement and the gated feature.
  */
-export const entitlementId = "";
+export const entitlementId = "premium";
 
-export const premiumFeatures: readonly string[] = [];
+export const premiumFeatures: readonly string[] = ["Premium tools"];

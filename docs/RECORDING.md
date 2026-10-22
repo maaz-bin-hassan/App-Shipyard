@@ -43,7 +43,7 @@ languages: en
 storeTargets: play
 ```
 
-Expected agent result when the toolchain checks pass: it reports `commands.start.status` is `done` and that auth is next and has no command yet.
+Expected agent result when the Expo app was created by createshipyard: it reports that the template is already written and that the remaining inputs are the logo and `.env`.
 
 Expected agent result when a toolchain check fails: it reports `commands.env-check.status` and `commands.start.status` as `blocked`, prints the install hint for this OS, and does not run an installer. Record that outcome as the demo if that is what the machine did. Do not cut the fail lines.
 

@@ -169,7 +169,7 @@ Checked against current vendor docs on 2026-10-20. The config object in `scripts
 
 ## Scaffold
 
-`createshipyard` lives in `cli/`. From this repository, `pnpm cli:build` then `node cli/dist/index.js my-app` copies `platforms/<id>/template` by running `scripts/sync-project.mjs`, writes a project `AGENTS.md` and `.shipkit/state.json`, initializes git, installs dependencies, and prints the next slash command. `npm run pack:npm` builds `release/createshipyard-1.1.0.tgz`. That tarball is the package to publish. It is not on the npm registry until someone publishes it.
+`createshipyard` lives in `cli/`. From this repository, `pnpm cli:build` then `node cli/dist/index.js my-app` copies `platforms/<id>/template` by running `scripts/sync-project.mjs`, writes a project `AGENTS.md` and `.shipkit/state.json`, initializes git, and installs dependencies. For Expo it also writes the paywall defaults, `docs/monetization.md`, the legal drafts, the English review, the store listing, and a placeholder icon. That platform's next step is to replace the icon and fill `.env`. `npm run pack:npm` builds `release/createshipyard-1.1.0.tgz`. That tarball is the package to publish. It is not on the npm registry until someone publishes it.
 
 Flags are `--agent` (`claude`, `cursor`, `opencode`, or `all`), `--platform` (`flutter` by default, or `expo`, `android`, `ios`), `--pm` (`npm`, `pnpm`, or `yarn`), and `--no-install`. The default platform is `flutter`. `ios` is refused when `process.platform` is not `darwin`.
 

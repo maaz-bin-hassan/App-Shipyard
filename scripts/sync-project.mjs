@@ -2,6 +2,7 @@ import { copyFile, mkdir, readFile, readdir, writeFile } from "node:fs/promises"
 import path from "node:path";
 import { parseArgs } from "node:util";
 import { fileURLToPath } from "node:url";
+import { finishExpoApp } from "./finish-expo-app.mjs";
 import { compileProject } from "./lib/compile-project.mjs";
 import { EXPO_DEV_DEPENDENCIES, EXPO_SDK_VERSIONS } from "./lib/expo-versions.mjs";
 
@@ -98,6 +99,16 @@ export async function syncProject({ dest, platform, agents, appName, application
     platformId: platform,
     agents,
   });
+
+  if (platform === "expo") {
+    await finishExpoApp({
+      dest,
+      appName,
+      applicationId,
+      primaryColor,
+      kitVersion: kitPackage.version,
+    });
+  }
 }
 
 async function copyTree(source, dest) {

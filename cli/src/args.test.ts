@@ -33,7 +33,8 @@ describe("createshipyard args", () => {
 
   it("builds the application id and the Claude Code next step", () => {
     assert.equal(applicationIdFor("my-app"), "com.example.myapp");
-    assert.equal(nextStepSentence("claude"), "Open this folder in Claude Code and run /ship-start");
+    assert.match(nextStepSentence("expo"), /assets\/icon.png/);
+    assert.match(nextStepSentence("flutter"), /--platform expo/);
     assert.equal(platformHostError("ios", "win32"), "iOS native requires macOS and Xcode. Choose expo, flutter, or android on this machine.");
     assert.equal(platformHostError("expo", "win32"), null);
     assert.equal(isInsideKit("/tmp/kit/cli", "/tmp/kit"), true);

@@ -16,7 +16,7 @@ pnpm cli:build
 node cli/dist/index.js my-app
 ```
 
-That copies the Flutter template, compiles the slash commands, writes `AGENTS.md` and `.shipkit/state.json`, initializes git, and installs the app dependencies. Then open `my-app` in the agent you selected and run `/ship-start`. Pass `--platform expo` for the Expo template.
+That copies the Flutter template, writes `AGENTS.md` and `.shipkit/state.json`, initializes git, and installs dependencies. Pass `--platform expo` for the publishable app: paywall, pricing note, Supabase backend, design shell, English catalog, and legal drafts.
 
 Flags:
 
@@ -33,11 +33,11 @@ The step-by-step check is [docs/TESTING.md](docs/TESTING.md).
 
 ## What is included
 
-`createshipyard` copies the Flutter template by default. Pass `--platform expo` for the Expo path. These commands have core files and an Expo fragment:
+`createshipyard` copies the Flutter template by default. Pass `--platform expo` for the publishable app. Flutter, Android, and iOS templates are still stubs. These commands have core files and an Expo fragment:
 
 | Command | What it does |
 | --- | --- |
-| `start` | Saves the platform, the app identity, and the store targets, then runs env-check. |
+| `start` | Confirms the Expo app `createshipyard` already wrote. Logo and `.env` are the remaining inputs. |
 | `env-check` | Runs the toolchain commands in the platform manifest. It installs a tool only after an explicit yes. |
 | `plan-pricing` | Writes `docs/monetization.md` and the entitlement ids. It does not create store products. |
 | `paywall` | Gates premium features with the RevenueCat module in the Expo template. Live store products wait for an explicit yes. |
