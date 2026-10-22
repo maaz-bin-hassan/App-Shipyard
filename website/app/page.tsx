@@ -85,7 +85,7 @@ export default function HomePage() {
   return (
     <div className="mx-auto w-[min(1080px,calc(100%-32px))]">
       <section className="py-14 md:py-[88px]">
-        <p className="font-mono text-[14px] text-muted">App Shipyard 1.1.0</p>
+        <p className="font-mono text-[14px] text-muted">App Shipyard 1.2.0</p>
         <h1 className="mt-4 max-w-[16ch] text-[32px] font-semibold tracking-tight md:text-[48px] md:leading-[1.05]">
           {pitch}
         </h1>

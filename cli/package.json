@@ -1,6 +1,6 @@
 {
   "name": "createshipyard",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
   "description": "Scaffold an App Shipyard app. This directory is the source package. npm run pack:npm in the repository root builds the public tarball.",

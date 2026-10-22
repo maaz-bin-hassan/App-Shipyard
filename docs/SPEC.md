@@ -92,7 +92,7 @@ Flutter has both an Android manifest and an iOS `Info.plist`. The schema stores 
 {
   "platform": "flutter",
   "storeTargets": ["play", "appstore"],
-  "kitVersion": "1.1.0",
+  "kitVersion": "1.2.0",
   "answers": {},
   "commands": {
     "env-check": {
@@ -169,7 +169,7 @@ Checked against current vendor docs on 2026-10-20. The config object in `scripts
 
 ## Scaffold
 
-`createshipyard` lives in `cli/`. From this repository, `pnpm cli:build` then `node cli/dist/index.js my-app` copies `platforms/<id>/template` by running `scripts/sync-project.mjs`, writes a project `AGENTS.md` and `.shipkit/state.json`, initializes git, and installs dependencies. For Expo it also writes the paywall defaults, `docs/monetization.md`, the legal drafts, the English review, the store listing, and a placeholder icon. That platform's next step is to replace the icon and fill `.env`. `npm run pack:npm` builds `release/createshipyard-1.1.0.tgz`. That tarball is the package to publish. It is not on the npm registry until someone publishes it.
+`createshipyard` lives in `cli/`. From this repository, `pnpm cli:build` then `node cli/dist/index.js my-app` copies `platforms/<id>/template` by running `scripts/sync-project.mjs`, writes a project `AGENTS.md` and `.shipkit/state.json`, initializes git, and installs dependencies. For Expo it also writes the paywall defaults, `docs/monetization.md`, the legal drafts, the English review, the store listing, and a placeholder icon. That platform's next step is to replace the icon and fill `.env`. `npm run pack:npm` builds `release/createshipyard-1.2.0.tgz`. That tarball is the package to publish. It is not on the npm registry until someone publishes it.
 
 Flags are `--agent` (`claude`, `cursor`, `opencode`, or `all`), `--platform` (`flutter` by default, or `expo`, `android`, `ios`), `--pm` (`npm`, `pnpm`, or `yarn`), and `--no-install`. The default platform is `flutter`. `ios` is refused when `process.platform` is not `darwin`.
 
@@ -181,4 +181,4 @@ Flags are `--agent` (`claude`, `cursor`, `opencode`, or `all`), `--platform` (`f
 
 `node scripts/plan-update.mjs` prints `kitVersion`, `latest`, `ahead`, and `migrations`. It does not edit files. Before applying a guide, the command creates branch `ship-update-checkpoint-<stamp>` and writes `.shipkit/update-checkpoint.json` with `branch`, `head`, and `stashed`. That file stays under `.shipkit/`, which is gitignored. A guide may name only the files it changes. Rollback is `git reset --hard` on the recorded `head`.
 
-How to write the next version bump is in [docs/migrations/README.md](migrations/README.md). This repository is `1.1.0`. There is no `docs/migrations/1.0.0.md` because `1.0.0` was the first numbered release. `docs/migrations/1.1.0.md` is the guide from that release.
+How to write the next version bump is in [docs/migrations/README.md](migrations/README.md). This repository is `1.2.0`. There is no `docs/migrations/1.0.0.md` because `1.0.0` was the first numbered release. `docs/migrations/1.1.0.md` is the guide from that release. `docs/migrations/1.2.0.md` is the guide from `1.1.0`.

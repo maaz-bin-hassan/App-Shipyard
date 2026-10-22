@@ -1,7 +1,7 @@
 {
   "name": "fastappshipkit",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "description": "App Shipyard. AI-agent starter kit for shipping mobile apps. Command contract, compiler, and shared Supabase backend.",
   "license": "MIT",

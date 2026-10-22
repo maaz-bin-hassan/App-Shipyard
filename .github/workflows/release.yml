@@ -37,6 +37,6 @@ jobs:
         run: pnpm pack:npm
 
       - name: Dry run only
-        run: npm publish release/createshipyard-1.1.0.tgz --dry-run --access public
+        run: npm publish release/createshipyard-1.2.0.tgz --dry-run --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

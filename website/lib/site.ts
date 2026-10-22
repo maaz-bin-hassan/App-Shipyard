@@ -9,7 +9,7 @@ export const siteUrl = resolveSiteUrl();
 export const installCommand = "npx createshipyard my-app";
 
 export const siteDescription =
-  "createshipyard scaffolds a Flutter app by default. Pass --platform expo for the publishable app: RevenueCat paywall, pricing, Supabase backend, design, and translations. Version 1.1.0.";
+  "createshipyard scaffolds a Flutter app by default. Pass --platform expo for the publishable app: RevenueCat paywall, pricing, Supabase backend, design, and translations. Version 1.2.0.";
 
 function resolveSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();

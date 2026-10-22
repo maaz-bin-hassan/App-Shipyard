@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Markdown } from "@/components/markdown";
 import { loadChangelog } from "@/lib/changelog";
 
-const description = "Changes recorded in CHANGELOG.md. createshipyard 1.1.0 is the current release.";
+const description = "Changes recorded in CHANGELOG.md. createshipyard 1.2.0 is the current release.";
 
 export const metadata: Metadata = {
   title: "Changelog",

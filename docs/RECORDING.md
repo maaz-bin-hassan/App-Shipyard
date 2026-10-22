@@ -4,7 +4,7 @@ Three short demos. Record the terminal, keep the command and the process output,
 
 Do not type a secret, a keystore password, or a service-account JSON into the recording.
 
-Replace the directory names if `demo-start` already exists. Run the kit commands from a clone whose `package.json` version is `1.1.0`.
+Replace the directory names if `demo-start` already exists. Run the kit commands from a clone whose `package.json` version is `1.2.0`.
 
 ## Demo 1: start
 
@@ -53,7 +53,7 @@ Confirm with:
 node -e "const s=require('../demo-start/.shipkit/state.json'); console.log(s.platform, s.kitVersion, s.commands.start.status)"
 ```
 
-Expected stdout is one line: `expo 1.1.0 done` or `expo 1.1.0 blocked`.
+Expected stdout is one line: `expo 1.2.0 done` or `expo 1.2.0 blocked`.
 
 ## Demo 2: paywall
 

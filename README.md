@@ -2,7 +2,7 @@
 
 App Shipyard is a starter kit for shipping one mobile app with an AI coding agent. You scaffold the app with `createshipyard`, then run the same `/ship-*` commands in Claude Code, Cursor, OpenCode, Google Antigravity, or Codex.
 
-Version 1.1.0. The commands, the Expo template, and the CLI tests live in this repository.
+Version 1.2.0. The commands, the Expo template, and the CLI tests live in this repository.
 
 ## 60-second quick start
 
@@ -27,7 +27,7 @@ Flags:
 
 `ios` is refused when `node -p process.platform` is not `darwin`.
 
-`npm run pack:npm` writes `release/createshipyard-1.1.0.tgz`. That tarball is the npm package. It is not on the npm registry until it is published. After it is published, the scaffold command is `npx createshipyard my-app`.
+`npm run pack:npm` writes `release/createshipyard-1.2.0.tgz`. That tarball is the npm package. It is not on the npm registry until it is published. After it is published, the scaffold command is `npx createshipyard my-app`.
 
 The step-by-step check is [docs/TESTING.md](docs/TESTING.md).
 
