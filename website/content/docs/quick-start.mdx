@@ -17,7 +17,7 @@ The later Expo toolchain check is stricter than the installer. It accepts Node.j
 npx createshipyard my-app
 ```
 
-npm downloads `createshipyard` and runs it. The current release is 1.0.0. The command copies the Expo template, compiles `/ship-*` commands for Claude Code, and writes `AGENTS.md` and `.shipkit/state.json`. It initializes git on branch `main` and makes an initial commit when `user.name` and `user.email` are set. It then runs `npm install` inside `my-app`.
+npm downloads `createshipyard` and runs it. The current release is 1.0.0. The command copies the Flutter template, compiles `/ship-*` commands for Claude Code, and writes `AGENTS.md` and `.shipkit/state.json`. It initializes git on branch `main` and makes an initial commit when `user.name` and `user.email` are set. It then runs `npm install` inside `my-app`. Pass `--platform expo` for the Expo template.
 
 The last lines are:
 
@@ -36,7 +36,7 @@ npx createshipyard my-app --agent cursor --platform expo --pm npm
 ```
 
 - `--agent` is `claude`, `cursor`, `opencode`, or `all`. The default is `claude`. `all` writes Claude Code, Cursor, and OpenCode.
-- `--platform` is `expo`, `flutter`, `android`, or `ios`. The default is `expo`. `ios` is refused when the machine is not macOS.
+- `--platform` is `expo`, `flutter`, `android`, or `ios`. The default is `flutter`. `ios` is refused when the machine is not macOS.
 - `--pm` is `npm`, `pnpm`, or `yarn`. The default is `npm`. That choice is the installer for the new app.
 - `--no-install` skips dependency installation. The new folder still gets the template, the commands, and git.
 
@@ -50,4 +50,4 @@ cd my-app
 
 Open that folder in the agent you selected and run `/ship-start`. Cursor users who passed `--agent cursor` see: open this folder in Cursor and run `/ship-start`.
 
-The Expo template is the one this package copies by default. The Flutter, Android, and iOS templates are stubs. They are not buildable projects yet.
+The Flutter template is the one this package copies by default. Pass `--platform expo` for the Expo template. The Flutter, Android, and iOS templates are stubs. They are not buildable projects yet.

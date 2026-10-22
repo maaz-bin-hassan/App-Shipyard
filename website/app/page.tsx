@@ -19,8 +19,8 @@ const services = [
   {
     id: "expo" as const,
     name: "Expo",
-    setup: "The default template. createshipyard copies it, writes the app config, and installs dependencies.",
-    easy: "One command creates the project. You pick Flutter, Android, or iOS only when you mean to. Those three templates are still stubs.",
+    setup: "createshipyard copies this template when you pass --platform expo, writes the app config, and installs dependencies.",
+    easy: "The default platform is Flutter. Pass --platform expo for this template. The Flutter, Android, and iOS templates are still stubs.",
   },
   {
     id: "supabase" as const,

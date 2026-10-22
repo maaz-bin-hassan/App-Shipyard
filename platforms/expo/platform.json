@@ -37,9 +37,9 @@
       "command": "node scripts/android-sdk-platform.mjs 37",
       "expected": "android-sdk-37",
       "install": {
-        "windows": "Minimum: Android SDK Platform 37 (Expo SDK 58 compileSdk) and Platform 36 (Play target). sdkmanager \"platforms;android-37\" \"platforms;android-36\"",
-        "macos": "Minimum: Android SDK Platform 37 (Expo SDK 58 compileSdk) and Platform 36 (Play target). sdkmanager \"platforms;android-37\" \"platforms;android-36\"",
-        "linux": "Minimum: Android SDK Platform 37 (Expo SDK 58 compileSdk) and Platform 36 (Play target). sdkmanager \"platforms;android-37\" \"platforms;android-36\""
+        "windows": "Minimum: Android SDK Platform 37 or a newer installed platform (Expo SDK 58 compileSdk). Platform 36 is the Play target. sdkmanager \"platforms;android-37\" \"platforms;android-36\"",
+        "macos": "Minimum: Android SDK Platform 37 or a newer installed platform (Expo SDK 58 compileSdk). Platform 36 is the Play target. sdkmanager \"platforms;android-37\" \"platforms;android-36\"",
+        "linux": "Minimum: Android SDK Platform 37 or a newer installed platform (Expo SDK 58 compileSdk). Platform 36 is the Play target. sdkmanager \"platforms;android-37\" \"platforms;android-36\""
       }
     },
     {

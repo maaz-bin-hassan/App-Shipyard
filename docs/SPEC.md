@@ -171,7 +171,7 @@ Checked against current vendor docs on 2026-10-20. The config object in `scripts
 
 `createshipyard` lives in `cli/`. From this repository, `pnpm cli:build` then `node cli/dist/index.js my-app` copies `platforms/<id>/template` by running `scripts/sync-project.mjs`, writes a project `AGENTS.md` and `.shipkit/state.json`, initializes git, installs dependencies, and prints the next slash command. `npm run pack:npm` builds `release/createshipyard-1.0.0.tgz`. That tarball is the package to publish. It is not on the npm registry until someone publishes it.
 
-Flags are `--agent` (`claude`, `cursor`, `opencode`, or `all`), `--platform` (`expo` by default, or `flutter`, `android`, `ios`), `--pm` (`npm`, `pnpm`, or `yarn`), and `--no-install`. The default platform is `expo`. `ios` is refused when `process.platform` is not `darwin`.
+Flags are `--agent` (`claude`, `cursor`, `opencode`, or `all`), `--platform` (`flutter` by default, or `expo`, `android`, `ios`), `--pm` (`npm`, `pnpm`, or `yarn`), and `--no-install`. The default platform is `flutter`. `ios` is refused when `process.platform` is not `darwin`.
 
 `scripts/e2esmoke.sh` scaffolds into a temporary directory, then runs `tsc --noEmit` and `expo export --platform android`.
 

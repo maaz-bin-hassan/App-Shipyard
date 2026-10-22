@@ -9,7 +9,7 @@ pnpm cli:build
 node cli/dist/index.js my-app
 ```
 
-The same flags work after the build: `--agent claude|cursor|opencode|all`, `--platform expo|flutter|android|ios`, `--pm npm|pnpm|yarn`, and `--no-install`.
+The same flags work after the build: `--agent claude|cursor|opencode|all`, `--platform expo|flutter|android|ios` (default `flutter`), `--pm npm|pnpm|yarn`, and `--no-install`.
 
 Default agent text:
 

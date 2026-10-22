@@ -38,7 +38,7 @@ export function parseCli(argv: string[]): ParseResult {
       args: argv,
       options: {
         agent: { type: "string", default: "claude" },
-        platform: { type: "string", default: "expo" },
+        platform: { type: "string", default: "flutter" },
         pm: { type: "string", default: "npm" },
         "no-install": { type: "boolean", default: false },
         help: { type: "boolean", default: false },
@@ -56,7 +56,7 @@ export function parseCli(argv: string[]): ParseResult {
   if (positionals.length !== 1) return { ok: false, error: USAGE };
 
   const agent = values.agent ?? "claude";
-  const platform = values.platform ?? "expo";
+  const platform = values.platform ?? "flutter";
   const packageManager = values.pm ?? "npm";
   if (!isAgent(agent)) {
     return { ok: false, error: `Unknown agent: ${agent}. Use claude, cursor, opencode, or all.` };

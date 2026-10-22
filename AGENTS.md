@@ -140,7 +140,7 @@ Report pass or fail for every toolchain check in the selected platform manifest,
 
 - `.shipkit/state.json` exists and `platform` is `flutter`.
 - The manifest is `platforms/flutter/platform.json` in this repository. In an app created by `createshipyard`, it is `docs/kit/platform.json`. Use the first of those that exists.
-- That manifest's `envChecks` name Flutter 3.47.0, Dart 3.13.0, JDK 17, Android SDK Platform-Tools, and Android SDK Platform 36.
+- That manifest's `envChecks` name Flutter 3.47.0, Dart 3.13.0, JDK 17, Android SDK Platform-Tools, and an installed Android SDK platform (the manifest names Platform 36).
 - Run every command from the repository root.
 - This command only updates `.shipkit/state.json`. Application source is left untouched.
 
@@ -154,12 +154,12 @@ The checks come first. If every check passes or is skipped, ask nothing and leav
 
 1. Read `.shipkit/state.json` and `package.json`. If `commands.env-check.status` is `done` and `kitVersion` matches `package.json` `version`, report that the check already passed and stop. Otherwise record step `1` as `done`.
 2. Set `commands.env-check` and step `2` to `in_progress` and write the current UTC timestamp.
-3. Detect the OS as `windows`, `macos`, or `linux`. For each object in the manifest from Preconditions `envChecks`, in order, record step `3.1`, `3.2`, and so on. Apply the version rules in Verify. `node --version` uses the Node.js rule. A `Minimum:` that does not start with a digit passes on `expected` alone, except `node scripts/android-sdk-platform.mjs`, which passes only when it prints its `expected` token. When the OS is not `macos` and both `install.windows` and `install.linux` start with `macOS only:`, record that check `skipped`. Otherwise run `command`, read stdout and stderr together, and record `done` or `blocked`. For a blocked check, print `fail`, the command, and the `install` hint for this OS. Do not run the hint in this step. Write each timestamp, then set step `3` to `done` or `blocked`.
+3. Detect the OS as `windows`, `macos`, or `linux`. For each object in the manifest from Preconditions `envChecks`, in order, record step `3.1`, `3.2`, and so on. Apply the version rules in Verify. `node --version` uses the Node.js rule. A `Minimum:` that does not start with a digit passes on `expected` alone, except `node scripts/android-sdk-platform.mjs`, which passes when it prints `android-sdk-` plus any installed API level. When the OS is not `macos` and both `install.windows` and `install.linux` start with `macOS only:`, record that check `skipped`. Otherwise run `command`, read stdout and stderr together, and record `done` or `blocked`. For a blocked check, print `fail`, the command, and the `install` hint for this OS. Do not run the hint in this step. Write each timestamp, then set step `3` to `done` or `blocked`.
 4. Set the command status to `done` when step `3` is `done`, otherwise `blocked`, and write the timestamp. If any check is `blocked` and `answers.runInstallHints` is missing, ask once whether to run the install hints and record `yes` or `no`. Do not ask when that answer is already set. When it is `yes`, run each failed hint once, then repeat those checks and write the new statuses. When it is `no`, leave the command `blocked`. A hint that starts with `macOS only:` is not an installer.
 
 ## Verify
 
-The report lists every `envChecks` entry as pass, fail, or skipped. A pass means `expected` appears in the combined stdout and stderr and the reported version satisfies that entry's `Minimum:`. Windows and Linux hints that start with `macOS only:` are skipped when the OS is not macOS. The command is `done` only when every entry passed or was skipped. Each failure includes the install hint for the current OS. When any check failed, `answers.runInstallHints` is `yes` or `no`. When every check passed or was skipped, that key is absent. The transcript and state file contain no values from `.env` or other secrets.
+The report lists every `envChecks` entry as pass, fail, or skipped. A pass means `expected` appears in the combined stdout and stderr and the reported version satisfies that entry's `Minimum:`. The Android SDK platform check is the exception: it passes when the script prints `android-sdk-` plus any installed API level, including a level other than the one in `expected`. Windows and Linux hints that start with `macOS only:` are skipped when the OS is not macOS. The command is `done` only when every entry passed or was skipped. Each failure includes the install hint for the current OS. When any check failed, `answers.runInstallHints` is `yes` or `no`. When every check passed or was skipped, that key is absent. The transcript and state file contain no values from `.env` or other secrets.
 
 Version rules:
 
@@ -167,7 +167,7 @@ Version rules:
 - A single `Minimum:` version passes when each numeric part is greater, or earlier parts are equal and the first differing part is greater. A shorter version is padded with zeros.
 - JDK passes when the major is at least the minimum. For a quoted version starting with `1.`, the major is the second component. Otherwise it is the first.
 - `java -version` writes to stderr. Read stdout and stderr together.
-- The Android SDK platform check passes when the command prints `android-sdk-` plus the API level in `expected`.
+- The Android SDK platform check passes when the command prints `android-sdk-` plus an installed API level. The script searches installed platforms and prints the requested level when that platform is installed. Otherwise it prints the newest installed level above the request, or the newest installed level when only an older platform is present. `missing` fails only when no platform is installed. Do not block the command because the printed level differs from `expected`.
 
 ## Rollback
 

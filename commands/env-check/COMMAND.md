@@ -15,7 +15,7 @@ The checks come first. If every check passes or is skipped, ask nothing and leav
 
 ## Verify
 
-The report lists every `envChecks` entry as pass, fail, or skipped. A pass means `expected` appears in the combined stdout and stderr and the reported version satisfies that entry's `Minimum:`. Windows and Linux hints that start with `macOS only:` are skipped when the OS is not macOS. The command is `done` only when every entry passed or was skipped. Each failure includes the install hint for the current OS. When any check failed, `answers.runInstallHints` is `yes` or `no`. When every check passed or was skipped, that key is absent. The transcript and state file contain no values from `.env` or other secrets.
+The report lists every `envChecks` entry as pass, fail, or skipped. A pass means `expected` appears in the combined stdout and stderr and the reported version satisfies that entry's `Minimum:`. The Android SDK platform check is the exception: it passes when the script prints `android-sdk-` plus any installed API level, including a level other than the one in `expected`. Windows and Linux hints that start with `macOS only:` are skipped when the OS is not macOS. The command is `done` only when every entry passed or was skipped. Each failure includes the install hint for the current OS. When any check failed, `answers.runInstallHints` is `yes` or `no`. When every check passed or was skipped, that key is absent. The transcript and state file contain no values from `.env` or other secrets.
 
 Version rules:
 
@@ -23,7 +23,7 @@ Version rules:
 - A single `Minimum:` version passes when each numeric part is greater, or earlier parts are equal and the first differing part is greater. A shorter version is padded with zeros.
 - JDK passes when the major is at least the minimum. For a quoted version starting with `1.`, the major is the second component. Otherwise it is the first.
 - `java -version` writes to stderr. Read stdout and stderr together.
-- The Android SDK platform check passes when the command prints `android-sdk-` plus the API level in `expected`.
+- The Android SDK platform check passes when the command prints `android-sdk-` plus an installed API level. The script searches installed platforms and prints the requested level when that platform is installed. Otherwise it prints the newest installed level above the request, or the newest installed level when only an older platform is present. `missing` fails only when no platform is installed. Do not block the command because the printed level differs from `expected`.
 
 ## Never
 

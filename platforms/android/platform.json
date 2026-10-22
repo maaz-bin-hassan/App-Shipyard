@@ -28,9 +28,9 @@
       "command": "node scripts/android-sdk-platform.mjs 36",
       "expected": "android-sdk-36",
       "install": {
-        "windows": "Minimum: Android SDK Platform 36. sdkmanager \"platforms;android-36\" \"platform-tools\"",
-        "macos": "Minimum: Android SDK Platform 36. sdkmanager \"platforms;android-36\" \"platform-tools\"",
-        "linux": "Minimum: Android SDK Platform 36. sdkmanager \"platforms;android-36\" \"platform-tools\""
+        "windows": "Minimum: Android SDK Platform 36 or a newer installed platform. sdkmanager \"platforms;android-36\" \"platform-tools\"",
+        "macos": "Minimum: Android SDK Platform 36 or a newer installed platform. sdkmanager \"platforms;android-36\" \"platform-tools\"",
+        "linux": "Minimum: Android SDK Platform 36 or a newer installed platform. sdkmanager \"platforms;android-36\" \"platform-tools\""
       }
     }
   ],

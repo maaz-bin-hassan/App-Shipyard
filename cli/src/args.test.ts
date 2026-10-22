@@ -4,13 +4,13 @@ import { parseCli } from "./args.js";
 import { applicationIdFor, isInsideKit, nextStepSentence, platformHostError } from "./project.js";
 
 describe("createshipyard args", () => {
-  it("defaults to expo, claude, and npm install", () => {
+  it("defaults to flutter, claude, and npm install", () => {
     const parsed = parseCli(["my-app"]);
     assert.equal(parsed.ok, true);
     if (!parsed.ok || parsed.help) return;
     assert.equal(parsed.options.directory, "my-app");
     assert.equal(parsed.options.agent, "claude");
-    assert.equal(parsed.options.platform, "expo");
+    assert.equal(parsed.options.platform, "flutter");
     assert.equal(parsed.options.packageManager, "npm");
     assert.equal(parsed.options.install, true);
   });

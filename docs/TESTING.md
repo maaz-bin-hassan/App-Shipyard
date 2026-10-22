@@ -148,7 +148,7 @@ node scripts/android-sdk-platform.mjs 37
 
 On macOS also run `xcodebuild -version` and `pod --version`. On Windows and Linux those two are skipped because their install hints start with `macOS only:`.
 
-Expected for a pass: `node --version` matches the Node rule in [the env-check command](../commands/env-check/COMMAND.md), `java -version` reports a major of 17 or newer, `adb version` contains `Android Debug Bridge`, and the SDK script prints `android-sdk-37`.
+Expected for a pass: `node --version` matches the Node rule in [the env-check command](../commands/env-check/COMMAND.md), `java -version` reports a major of 17 or newer, `adb version` contains `Android Debug Bridge`, and the SDK script prints `android-sdk-` plus an installed API. Platform 37 prints `android-sdk-37`. A newer platform prints that newer level. An older installed platform, such as 36, prints that level and still passes. `missing` means no Android SDK platform is installed.
 
 Expected for a fail: the command exits non-zero or the expected text is missing. Write down the install hint from `platforms/expo/platform.json` for your OS. Do not run the hint unless you decide to. Saying no is a completed check: the command status is `blocked`, and `answers.runInstallHints` is `no`.
 

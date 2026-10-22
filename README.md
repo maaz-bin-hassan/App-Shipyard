@@ -16,12 +16,12 @@ pnpm cli:build
 node cli/dist/index.js my-app
 ```
 
-That copies the Expo template, compiles the slash commands, writes `AGENTS.md` and `.shipkit/state.json`, initializes git, and installs the app dependencies. Then open `my-app` in the agent you selected and run `/ship-start`.
+That copies the Flutter template, compiles the slash commands, writes `AGENTS.md` and `.shipkit/state.json`, initializes git, and installs the app dependencies. Then open `my-app` in the agent you selected and run `/ship-start`. Pass `--platform expo` for the Expo template.
 
 Flags:
 
 - `--agent claude|cursor|opencode|all` (default `claude`)
-- `--platform expo|flutter|android|ios` (default `expo`)
+- `--platform expo|flutter|android|ios` (default `flutter`)
 - `--pm npm|pnpm|yarn` (default `npm`)
 - `--no-install`
 
@@ -33,7 +33,7 @@ The step-by-step check is [docs/TESTING.md](docs/TESTING.md).
 
 ## What is included
 
-The Expo path is the one `createshipyard` copies by default. These commands have core files and an Expo fragment:
+`createshipyard` copies the Flutter template by default. Pass `--platform expo` for the Expo path. These commands have core files and an Expo fragment:
 
 | Command | What it does |
 | --- | --- |

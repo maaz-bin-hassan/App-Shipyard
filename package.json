@@ -14,7 +14,7 @@
     "tsc": "tsc --noEmit",
     "compile": "node scripts/compile-commands.mjs",
     "cli:build": "tsc -p cli/tsconfig.json",
-    "test:cli": "tsc -p cli/tsconfig.json && node --test cli/dist/args.test.js cli/dist/scaffold.test.js scripts/lib/update-plan.test.mjs",
+    "test:cli": "tsc -p cli/tsconfig.json && node --test cli/dist/args.test.js cli/dist/scaffold.test.js scripts/lib/update-plan.test.mjs scripts/android-sdk-platform.test.mjs",
     "test": "npm run test:cli && npm run test:backend && npm run test:billing && npm run test:analytics && npm run test:ai && npm run test:permissions && npm run test:design && npm run test:i18n && npm run test:legal",
     "smoke": "bash scripts/e2esmoke.sh",
     "pack:npm": "node scripts/pack-npm.mjs",
