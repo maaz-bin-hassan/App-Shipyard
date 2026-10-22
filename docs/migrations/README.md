@@ -6,7 +6,7 @@ In this repository the release notes are `CHANGELOG.md` and the package version 
 
 `node scripts/plan-update.mjs` prints the plan. It does not edit files.
 
-This repository is `1.0.0`. There is no `docs/migrations/1.0.0.md`. A checkout whose `kitVersion` is `0.0.0` moves to `1.0.0` with an empty migration list. The sample below is the shape of the next bump. It is not a live guide, so `ship-update` does not apply it.
+This repository is `1.1.0`. There is no `docs/migrations/1.0.0.md`. `docs/migrations/1.1.0.md` is the guide from `1.0.0`. A checkout whose `kitVersion` is `0.0.0` moves to `1.0.0` with an empty migration list, then applies `1.1.0`. The sample below is the shape of a later bump. It is not a live guide, so `ship-update` does not apply it.
 
 ## How to bump to the next version
 

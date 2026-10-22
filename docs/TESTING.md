@@ -19,7 +19,7 @@ JDK, Android SDK, Xcode, and CocoaPods are not required for the scaffold steps. 
 
 | Step | Pass |
 | --- | --- |
-| 1. Clone | The directory contains `package.json` with `"version": "1.0.0"`. |
+| 1. Clone | The directory contains `package.json` with `"version": "1.1.0"`. |
 | 2. Install | `pnpm install --frozen-lockfile` exits 0. |
 | 3. Command contract | The last line is `lint:commands ok`. |
 | 4. Unit tests | The Node reporter prints `fail 0` and the process exits 0. |
@@ -38,7 +38,7 @@ git clone https://github.com/maaz-bin-hassan/FastAppShip-kit.git
 cd FastAppShip-kit
 ```
 
-Expected: `package.json` contains `"name": "fastappshipkit"` and `"version": "1.0.0"`. `cli/package.json` and `website/package.json` also say `"version": "1.0.0"`.
+Expected: `package.json` contains `"name": "fastappshipkit"` and `"version": "1.1.0"`. `cli/package.json` and `website/package.json` also say `"version": "1.1.0"`.
 
 If the clone fails, the GitHub URL is wrong or the network blocked it. This document cannot fix that.
 
@@ -120,7 +120,7 @@ Expected:
 Then confirm the app files:
 
 ```bash
-node -e "const fs=require('fs'); const s=JSON.parse(fs.readFileSync('../shipyard-fresh/.shipkit/state.json','utf8')); if(s.platform!=='expo'||s.kitVersion!=='1.0.0') process.exit(1); JSON.parse(fs.readFileSync('../shipyard-fresh/docs/kit/platform.json','utf8'));"
+node -e "const fs=require('fs'); const s=JSON.parse(fs.readFileSync('../shipyard-fresh/.shipkit/state.json','utf8')); if(s.platform!=='expo'||s.kitVersion!=='1.1.0') process.exit(1); JSON.parse(fs.readFileSync('../shipyard-fresh/docs/kit/platform.json','utf8'));"
 ```
 
 Expected: exit code 0.
@@ -249,14 +249,14 @@ From the kit root:
 npm run pack:npm
 ```
 
-Expected: exit code 0 and a file `release/createshipyard-1.0.0.tgz`.
+Expected: exit code 0 and a file `release/createshipyard-1.1.0.tgz`.
 
 Install that tarball into an empty directory and run help:
 
 ```bash
 mkdir ../shipyard-npm-check
 cd ../shipyard-npm-check
-npm install ../FastAppShip-kit/release/createshipyard-1.0.0.tgz
+npm install ../FastAppShip-kit/release/createshipyard-1.1.0.tgz
 npx createshipyard --help
 ```
 

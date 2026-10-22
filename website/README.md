@@ -1,6 +1,6 @@
 # App Shipyard website
 
-Next.js site for App Shipyard. Version 1.0.0. `next build` writes a static `out/` directory because `output` is `export` in `next.config.ts`.
+Next.js site for App Shipyard. Version 1.1.0. `next build` writes a static `out/` directory because `output` is `export` in `next.config.ts`.
 
 ## Local
 

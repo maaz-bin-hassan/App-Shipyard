@@ -166,6 +166,7 @@ Version rules:
 - Node.js passes on `22` when the minor is at least `13`, on `24` when the minor is at least `3`, and on even majors `26` or newer. Odd majors fail.
 - A single `Minimum:` version passes when each numeric part is greater, or earlier parts are equal and the first differing part is greater. A shorter version is padded with zeros.
 - JDK passes when the major is at least the minimum. For a quoted version starting with `1.`, the major is the second component. Otherwise it is the first.
+- CocoaPods passes when `pod --version` reports a version at least `1.17.0`. Its `expected` value is `.` because the command prints only the version number, so a newer major still matches.
 - `java -version` writes to stderr. Read stdout and stderr together.
 - The Android SDK platform check passes when the command prints `android-sdk-` plus an installed API level. The script searches installed platforms and prints the requested level when that platform is installed. Otherwise it prints the newest installed level above the request, or the newest installed level when only an older platform is present. `missing` fails only when no platform is installed. Do not block the command because the printed level differs from `expected`.
 

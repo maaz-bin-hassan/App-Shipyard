@@ -1,6 +1,6 @@
 # Contributing to App Shipyard
 
-Thanks for your interest in App Shipyard. The repository version is 1.0.0. Commands and architecture can still change. Read [docs/SPEC.md](docs/SPEC.md) before editing `commands/` or `platforms/`.
+Thanks for your interest in App Shipyard. The repository version is 1.1.0. Commands and architecture can still change. Read [docs/SPEC.md](docs/SPEC.md) before editing `commands/` or `platforms/`.
 
 ## Originality and intellectual property
 

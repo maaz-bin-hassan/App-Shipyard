@@ -7,7 +7,14 @@ This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-Nothing since 1.0.0.
+Nothing since 1.1.0.
+
+## [1.1.0] - 2026-10-22
+
+### Changed
+
+- Android SDK env-check uses an installed platform instead of failing when the named API level is missing. `createshipyard` defaults to Flutter. Pass `--platform expo` for the Expo template.
+- CocoaPods env-check accepts a newer major. `pod --version` no longer has to contain `1.`.
 
 ## [1.0.0] - 2026-10-21
 

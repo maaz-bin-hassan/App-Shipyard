@@ -85,14 +85,14 @@ export default function HomePage() {
   return (
     <div className="mx-auto w-[min(1080px,calc(100%-32px))]">
       <section className="py-14 md:py-[88px]">
-        <p className="font-mono text-[14px] text-muted">App Shipyard 1.0.0</p>
+        <p className="font-mono text-[14px] text-muted">App Shipyard 1.1.0</p>
         <h1 className="mt-4 max-w-[16ch] text-[32px] font-semibold tracking-tight md:text-[48px] md:leading-[1.05]">
           {pitch}
         </h1>
         <p className="mt-6 max-w-[68ch] text-[18px] text-muted">
-          App Shipyard is a starter kit for one mobile app. It copies an Expo project, writes the same slash commands
+          App Shipyard is a starter kit for one mobile app. It copies a Flutter project by default, writes the same slash commands
           for Claude Code, Cursor, or OpenCode, and leaves Supabase, RevenueCat, PostHog, and Sentry ready to finish
-          with your coding agent. The npm package is createshipyard.
+          with your coding agent. Pass --platform expo for the Expo template. The npm package is createshipyard.
         </p>
         <div className="mt-8 max-w-[640px]">
           <CodeBlock code={installCommand} language="bash" label="Install" copyLabel="Copy" copyVariant="primary" />

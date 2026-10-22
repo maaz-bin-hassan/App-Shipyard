@@ -2,7 +2,7 @@
 
 - `.shipkit/state.json` exists and `platform` is `expo`.
 - The manifest is `platforms/expo/platform.json` in this repository. In an app created by `createshipyard`, it is `docs/kit/platform.json`. Use the first of those that exists.
-- That manifest's `envChecks` name Node.js, JDK 17, Android SDK Platform-Tools, an installed Android SDK platform (the manifest names Platform 37), Xcode 26.4, and CocoaPods 1.17.0.
+- That manifest's `envChecks` name Node.js, JDK 17, Android SDK Platform-Tools, an installed Android SDK platform (the manifest names Platform 37), Xcode 26.4, and CocoaPods 1.17.0 or newer.
 - Xcode and CocoaPods are macOS-only checks. Their Windows and Linux hints start with `macOS only:`.
 - Run every command from the repository root.
 - This command only updates `.shipkit/state.json`. Application source is left untouched.

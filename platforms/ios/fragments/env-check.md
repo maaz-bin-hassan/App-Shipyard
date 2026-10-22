@@ -2,7 +2,7 @@
 
 - `.shipkit/state.json` exists and `platform` is `ios`.
 - The manifest is `platforms/ios/platform.json` in this repository. In an app created by `createshipyard`, it is `docs/kit/platform.json`. Use the first of those that exists.
-- That manifest's `envChecks` name macOS (`darwin`), Xcode 26, Swift 6.2, and CocoaPods 1.17.0.
+- That manifest's `envChecks` name macOS (`darwin`), Xcode 26, Swift 6.2, and CocoaPods 1.17.0 or newer.
 - The first check expects `darwin` from `node -p process.platform`. On Windows or Linux that check is `blocked`. Do not skip it and do not treat a missing Xcode install as a pass.
 - Run every command from the repository root.
 - This command only updates `.shipkit/state.json`. Application source is left untouched.

@@ -9,7 +9,7 @@ export const siteUrl = resolveSiteUrl();
 export const installCommand = "npx createshipyard my-app";
 
 export const siteDescription =
-  "App Shipyard scaffolds an Expo app and hands slash commands to your coding agent. Supabase, RevenueCat, PostHog, and Sentry are already in the template. Version 1.0.0.";
+  "App Shipyard scaffolds a mobile app and hands slash commands to your coding agent. The default platform is Flutter. Supabase, RevenueCat, PostHog, and Sentry are already in the Expo template. Version 1.1.0.";
 
 function resolveSiteUrl(): string {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();

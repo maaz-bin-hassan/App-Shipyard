@@ -53,7 +53,7 @@
     },
     {
       "command": "pod --version",
-      "expected": "1.",
+      "expected": ".",
       "install": {
         "windows": "macOS only: Minimum: 1.17.0. brew install cocoapods",
         "macos": "Minimum: 1.17.0. brew install cocoapods",
